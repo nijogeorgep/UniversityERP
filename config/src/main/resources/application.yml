@@ -1,13 +1,14 @@
-server.port: 8001
-
 spring:
-  application.name: config-server
-  cloud.config.server.git.uri: https://github.com/nijogeorgep/university-microservices-config.git
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/shared
+  profiles:
+     active: native
+  security:
+    user:
+      password: password
 
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:7001/eureka/
-    registryFetchIntervalSeconds: 1
-  instance:
-    leaseRenewalIntervalInSeconds: 1
+server:
+  port: 8888
