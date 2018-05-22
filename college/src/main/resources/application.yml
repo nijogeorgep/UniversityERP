@@ -1,0 +1,16 @@
+server:
+  port: 9000
+  
+spring:
+  application:
+    name: college-services
+  data:
+    mongodb:
+      host: localhost
+      database: universityerp
+      port: 27017
+      
+eureka:
+  client:
+    service-url:
+      
