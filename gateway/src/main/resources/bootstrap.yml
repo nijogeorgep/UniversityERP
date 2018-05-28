@@ -3,10 +3,13 @@ spring:
     name: gateway
   cloud:
     config:
-      uri: http://config:8888
+      uri: http://localhost:8888
       fail-fast: true
-      password: password
-      username: user
 
 server:
   port: 8080
+  
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:password@localhost:7000/eureka/

@@ -17,12 +17,7 @@ eureka:
     region: default
     registryFetchIntervalSeconds : 5
     serviceUrl:
-      defaultZone: http://registry:7000/eureka/
-
-security:
-  oauth2:
-    resource:
-      user-info-uri: http://auth-service:5000/uaa/users/current
+      defaultZone: http://admin:password@localhost:7000/eureka/
 
 spring:
   rabbitmq:

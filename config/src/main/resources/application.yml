@@ -10,6 +10,7 @@ spring:
      active: native
   security:
     user:
+      name: admin
       password: password
 
 server:
