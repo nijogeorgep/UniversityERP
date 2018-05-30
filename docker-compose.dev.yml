@@ -1,0 +1,30 @@
+version: '3'
+services:
+
+  rabbitmq:
+    ports:
+      - 5672:5672
+
+  config:
+    build: uconfig
+    ports:
+      - 8888:8888
+
+  registry:
+    build: udiscovery
+
+  gateway:
+    build: ugateway
+
+  college-service:
+    build: college-service
+    ports:
+      - 9000:9000
+
+  college-mongodb:
+    build: mongodb
+    ports:
+      - 25000:27017
+
+  monitoring:
+    build: umonitoring
