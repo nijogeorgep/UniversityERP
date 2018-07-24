@@ -10,8 +10,8 @@ spring:
       database: universityerp
       port: 27017
       
-eureka:
-  client:
-    service-url:
-      defaultZone: http://admin:password@localhost:7000/eureka/
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://admin:password@localhost:7000/eureka/
       

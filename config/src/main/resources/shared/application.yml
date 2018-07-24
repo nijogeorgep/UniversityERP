@@ -16,9 +16,9 @@ eureka:
   client:
     region: default
     registryFetchIntervalSeconds : 5
-    serviceUrl:
-      defaultZone: http://admin:password@localhost:7000/eureka/
+#    serviceUrl:
+#      defaultZone: http://admin:password@localhost:7000/eureka/
 
-spring:
-  rabbitmq:
-    host: rabbitmq
+#spring:
+#  rabbitmq:
+#    host: rabbitmq

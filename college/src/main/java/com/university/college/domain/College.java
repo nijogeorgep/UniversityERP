@@ -4,7 +4,6 @@
 package com.university.college.domain;
 
 import java.time.LocalDate;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -18,193 +17,201 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "colleges")
 public class College {
 
-	@Id
-	private String Id;
+  @Id
+  private String Id;
 
-	@Field
-	@Indexed
-	private String name;
+  @Field
+  @Indexed
+  private Long collegeId;
 
-	@Field
-	private String addressLine1;
+  @Field
+  @Indexed
+  private String name;
 
-	@Field
-	private String addressLine2;
+  @Field
+  private String addressLine1;
 
-	@DBRef
-	private City city;
+  @Field
+  private String addressLine2;
 
-	@DBRef
-	private State state;
+  @DBRef
+  private City city;
 
-	@DBRef
-	private Country country;
+  @DBRef
+  private State state;
 
-	@Field
-	@Indexed
-	private boolean activeStatus;
+  @DBRef
+  private Country country;
 
-	@Field
-	private LocalDate createdOn;
+  @Field
+  @Indexed
+  private boolean activeStatus;
 
-	@Field
-	private LocalDate updatedOn;
+  @Field
+  private LocalDate createdOn;
 
-	/**
-	 * 
-	 */
-	public College() {
-		// TODO Auto-generated constructor stub
-	}
+  @Field
+  private LocalDate updatedOn;
 
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return Id;
-	}
+  /**
+   * 
+   */
+  public College() {
+    // TODO Auto-generated constructor stub
+  }
 
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(String id) {
-		Id = id;
-	}
+  /**
+   * @return the id
+   */
+  public String getId() {
+    return Id;
+  }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+  /**
+   * @return the collegeId
+   */
+  public Long getCollegeId() {
+    return collegeId;
+  }
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+  /**
+   * @param collegeId the collegeId to set
+   */
+  public void setCollegeId(Long collegeId) {
+    this.collegeId = collegeId;
+  }
 
-	/**
-	 * @return the addressLine1
-	 */
-	public String getAddressLine1() {
-		return addressLine1;
-	}
+  /**
+   * @param id the id to set
+   */
+  public void setId(String id) {
+    Id = id;
+  }
 
-	/**
-	 * @param addressLine1
-	 *            the addressLine1 to set
-	 */
-	public void setAddressLine1(String addressLine1) {
-		this.addressLine1 = addressLine1;
-	}
+  /**
+   * @return the name
+   */
+  public String getName() {
+    return name;
+  }
 
-	/**
-	 * @return the addressLine2
-	 */
-	public String getAddressLine2() {
-		return addressLine2;
-	}
+  /**
+   * @param name the name to set
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	/**
-	 * @param addressLine2
-	 *            the addressLine2 to set
-	 */
-	public void setAddressLine2(String addressLine2) {
-		this.addressLine2 = addressLine2;
-	}
+  /**
+   * @return the addressLine1
+   */
+  public String getAddressLine1() {
+    return addressLine1;
+  }
 
-	/**
-	 * @return the city
-	 */
-	public City getCity() {
-		return city;
-	}
+  /**
+   * @param addressLine1 the addressLine1 to set
+   */
+  public void setAddressLine1(String addressLine1) {
+    this.addressLine1 = addressLine1;
+  }
 
-	/**
-	 * @param city
-	 *            the city to set
-	 */
-	public void setCity(City city) {
-		this.city = city;
-	}
+  /**
+   * @return the addressLine2
+   */
+  public String getAddressLine2() {
+    return addressLine2;
+  }
 
-	/**
-	 * @return the state
-	 */
-	public State getState() {
-		return state;
-	}
+  /**
+   * @param addressLine2 the addressLine2 to set
+   */
+  public void setAddressLine2(String addressLine2) {
+    this.addressLine2 = addressLine2;
+  }
 
-	/**
-	 * @param state
-	 *            the state to set
-	 */
-	public void setState(State state) {
-		this.state = state;
-	}
+  /**
+   * @return the city
+   */
+  public City getCity() {
+    return city;
+  }
 
-	/**
-	 * @return the country
-	 */
-	public Country getCountry() {
-		return country;
-	}
+  /**
+   * @param city the city to set
+   */
+  public void setCity(City city) {
+    this.city = city;
+  }
 
-	/**
-	 * @param country
-	 *            the country to set
-	 */
-	public void setCountry(Country country) {
-		this.country = country;
-	}
+  /**
+   * @return the state
+   */
+  public State getState() {
+    return state;
+  }
 
-	/**
-	 * @return the activeStatus
-	 */
-	public boolean isActiveStatus() {
-		return activeStatus;
-	}
+  /**
+   * @param state the state to set
+   */
+  public void setState(State state) {
+    this.state = state;
+  }
 
-	/**
-	 * @param activeStatus
-	 *            the activeStatus to set
-	 */
-	public void setActiveStatus(boolean activeStatus) {
-		this.activeStatus = activeStatus;
-	}
+  /**
+   * @return the country
+   */
+  public Country getCountry() {
+    return country;
+  }
 
-	/**
-	 * @return the createdOn
-	 */
-	public LocalDate getCreatedOn() {
-		return createdOn;
-	}
+  /**
+   * @param country the country to set
+   */
+  public void setCountry(Country country) {
+    this.country = country;
+  }
 
-	/**
-	 * @param createdOn
-	 *            the createdOn to set
-	 */
-	public void setCreatedOn(LocalDate createdOn) {
-		this.createdOn = createdOn;
-	}
+  /**
+   * @return the activeStatus
+   */
+  public boolean isActiveStatus() {
+    return activeStatus;
+  }
 
-	/**
-	 * @return the updatedOn
-	 */
-	public LocalDate getUpdatedOn() {
-		return updatedOn;
-	}
+  /**
+   * @param activeStatus the activeStatus to set
+   */
+  public void setActiveStatus(boolean activeStatus) {
+    this.activeStatus = activeStatus;
+  }
 
-	/**
-	 * @param updatedOn
-	 *            the updatedOn to set
-	 */
-	public void setUpdatedOn(LocalDate updatedOn) {
-		this.updatedOn = updatedOn;
-	}
+  /**
+   * @return the createdOn
+   */
+  public LocalDate getCreatedOn() {
+    return createdOn;
+  }
+
+  /**
+   * @param createdOn the createdOn to set
+   */
+  public void setCreatedOn(LocalDate createdOn) {
+    this.createdOn = createdOn;
+  }
+
+  /**
+   * @return the updatedOn
+   */
+  public LocalDate getUpdatedOn() {
+    return updatedOn;
+  }
+
+  /**
+   * @param updatedOn the updatedOn to set
+   */
+  public void setUpdatedOn(LocalDate updatedOn) {
+    this.updatedOn = updatedOn;
+  }
 
 }

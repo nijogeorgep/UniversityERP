@@ -14,8 +14,8 @@ eureka:
   client:
     registerWithEureka: false
     fetchRegistry: false
-    serviceUrl: 
-      defaultZone: http://admin:password@localhost:7000/eureka/
+#    serviceUrl: 
+#      defaultZone: http://admin:password@localhost:7000/eureka/
   server:
       waitTimeInMsWhenSyncEmpty: 0
   
