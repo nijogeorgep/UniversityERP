@@ -11,11 +11,10 @@ import org.slf4j.LoggerFactory;
  *
  */
 @SuppressWarnings("serial")
-public class CollegeNotFoundException extends Exception {
-
+public class HostelNotFoundException extends Exception {
   Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-
-  public CollegeNotFoundException(String string) {
+  
+  public HostelNotFoundException(String string) {
     LOGGER.error(string);
   }
 }

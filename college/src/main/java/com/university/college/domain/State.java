@@ -25,7 +25,7 @@ public class State {
 	@Indexed
 	private String name;
 
-	@DBRef
+	@DBRef(lazy = true)
 	private Country country;
 
 	@Field

@@ -47,6 +47,24 @@ public class StudentController {
     return new ResponseEntity<List<Student>>(HttpStatus.OK);
   }
 
+  @GetMapping("/students/active")
+  public ResponseEntity<List<Student>> getActiveStudents() {
+    List<Student> students = studentRepository.findByActiveStatus(true);
+    if (students.isEmpty()) {
+      return new ResponseEntity<List<Student>>(HttpStatus.NO_CONTENT);
+    }
+    return new ResponseEntity<List<Student>>(HttpStatus.OK);
+  }
+
+  @GetMapping("/students/inactive")
+  public ResponseEntity<List<Student>> getInactiveStudents() {
+    List<Student> students = studentRepository.findByActiveStatus(false);
+    if (students.isEmpty()) {
+      return new ResponseEntity<List<Student>>(HttpStatus.NO_CONTENT);
+    }
+    return new ResponseEntity<List<Student>>(HttpStatus.OK);
+  }
+
   @GetMapping("/students/{id}")
   public ResponseEntity<Student> getStudent(@PathVariable String studentId)
       throws StudentNotFoundException {

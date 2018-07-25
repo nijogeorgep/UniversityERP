@@ -48,10 +48,10 @@ public class Student {
   @Indexed
   private Integer yearOfJoining;
 
-  @DBRef
+  @DBRef(lazy = true)
   private College college;
 
-  @DBRef
+  @DBRef(lazy = true)
   private Hostel hostel;
 
   @Field

@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,13 +23,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.university.college.domain.College;
+import com.university.college.domain.Hostel;
+import com.university.college.domain.Student;
 import com.university.college.exceptions.CollegeNotFoundException;
+import com.university.college.exceptions.HostelNotFoundException;
 import com.university.college.repository.CollegeRepository;
+import com.university.college.repository.HostelRepository;
+import com.university.college.repository.StudentRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 /**
  * @author 553243
  *
  */
+@Api(basePath = "/colleges", description = "CRUD on College", produces = "application/json")
+@ApiResponses(value = {@ApiResponse(code = 200, message = "Successful"),
+    @ApiResponse(code = 401, message = "Unauthorized"),
+    @ApiResponse(code = 403, message = "Forbidden"),
+    @ApiResponse(code = 404, message = "Not Found")})
 @RestController
 public class CollegeController {
 
@@ -36,17 +51,45 @@ public class CollegeController {
   private CollegeRepository collegeRepository;
 
   @Autowired
+  private HostelRepository hostelRepository;
+
+  @Autowired
+  private StudentRepository studentRepository;
+
+  @Autowired
   private MongoOperations mongoOperations;
 
+  @ApiOperation(value = "View List of all colleges", response = List.class)
   @GetMapping("/colleges")
   public ResponseEntity<List<College>> getColleges() {
     List<College> colleges = collegeRepository.findAll();
     if (colleges.isEmpty()) {
       return new ResponseEntity<List<College>>(HttpStatus.NO_CONTENT);
     }
-    return new ResponseEntity<List<College>>(HttpStatus.OK);
+    return new ResponseEntity<List<College>>(colleges, HttpStatus.OK);
   }
 
+  @ApiOperation(value = "View List of all active colleges", response = List.class)
+  @GetMapping("/colleges/active")
+  public ResponseEntity<List<College>> getActiveColleges() {
+    List<College> colleges = collegeRepository.findByActiveStatus(true);
+    if (colleges.isEmpty()) {
+      return new ResponseEntity<List<College>>(HttpStatus.NO_CONTENT);
+    }
+    return new ResponseEntity<List<College>>(colleges, HttpStatus.OK);
+  }
+
+  @ApiOperation(value = "View List of all inactive colleges", response = List.class)
+  @GetMapping("/colleges/inactive")
+  public ResponseEntity<List<College>> getInactiveColleges() {
+    List<College> colleges = collegeRepository.findByActiveStatus(false);
+    if (colleges.isEmpty()) {
+      return new ResponseEntity<List<College>>(HttpStatus.NO_CONTENT);
+    }
+    return new ResponseEntity<List<College>>(colleges, HttpStatus.OK);
+  }
+
+  @ApiOperation(value = "View a college", response = College.class)
   @GetMapping("/colleges/{id}")
   public ResponseEntity<College> getCollege(@PathVariable String collegeId)
       throws CollegeNotFoundException {
@@ -59,6 +102,43 @@ public class CollegeController {
     return new ResponseEntity<College>(college.get(), HttpStatus.OK);
   }
 
+  @ApiOperation(value = "View a list hostels by college", response = List.class)
+  @GetMapping("/college/{collegeId}/hostels")
+  public ResponseEntity<List<Hostel>> getHostelsByCollege(@PathVariable String collegeId)
+      throws CollegeNotFoundException, HostelNotFoundException {
+    Optional<College> college = collegeRepository.findById(collegeId);
+    if (!college.isPresent()) {
+      throw new CollegeNotFoundException("College Not Found");
+    }
+
+    Optional<List<Hostel>> hostelsOptional =
+        hostelRepository.findAllByCollege(college.get().getId());
+    if (!hostelsOptional.isPresent()) {
+      throw new HostelNotFoundException("Hostels Not Found");
+    }
+
+    return new ResponseEntity<List<Hostel>>(hostelsOptional.get(), HttpStatus.OK);
+  }
+
+  @ApiOperation(value = "View a list students by college", response = List.class)
+  @GetMapping("/college/{collegeId}/students")
+  public ResponseEntity<List<Student>> getStudentsByCollege(@PathVariable String collegeId)
+      throws CollegeNotFoundException, HostelNotFoundException {
+    Optional<College> college = collegeRepository.findById(collegeId);
+    if (!college.isPresent()) {
+      throw new CollegeNotFoundException("College Not Found");
+    }
+
+    Optional<List<Student>> studentsOptional =
+        studentRepository.findAllByCollege(college.get().getId());
+    if (!studentsOptional.isPresent()) {
+      throw new HostelNotFoundException("Hostels Not Found");
+    }
+
+    return new ResponseEntity<List<Student>>(studentsOptional.get(), HttpStatus.OK);
+  }
+
+  @ApiOperation(value = "Create a college", response = Void.class)
   @PostMapping("/college")
   public ResponseEntity<Void> saveCollege(@RequestBody College college) {
     College collegesExists = mongoOperations.findOne(
@@ -78,9 +158,14 @@ public class CollegeController {
     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
   }
 
+  @ApiOperation(value = "Update college details by id", response = College.class)
   @PutMapping("/colleges/{id}")
   public ResponseEntity<College> updateCollege(@PathVariable String collegeId,
       @RequestBody College college) {
+
+    Assert.notNull(collegeId);
+    Assert.notNull(college);
+
     Optional<College> collegeOptional = collegeRepository.findById(collegeId);
     if (!collegeOptional.isPresent()) {
       return new ResponseEntity<College>(HttpStatus.NOT_FOUND);
@@ -92,6 +177,7 @@ public class CollegeController {
     return new ResponseEntity<College>(collegeOptional.get(), HttpStatus.OK);
   }
 
+  @ApiOperation(value = "Delete college details by id", response = College.class)
   @DeleteMapping("/colleges/{id}")
   public ResponseEntity<College> deleteCollege(@PathVariable String collegeId) {
     Optional<College> collegeOptional = collegeRepository.findById(collegeId);

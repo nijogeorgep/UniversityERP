@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @author 553243
@@ -18,29 +19,33 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class College {
 
   @Id
-  private String Id;
+  private String id;
 
   @Field
   @Indexed
+  @ApiModelProperty(notes = "The unique college id")
   private Long collegeId;
 
   @Field
   @Indexed
+  @ApiModelProperty(notes = "College Name")
   private String name;
 
   @Field
+  @ApiModelProperty(notes = "College address line 1")
   private String addressLine1;
 
   @Field
+  @ApiModelProperty(notes = "College address line 2")
   private String addressLine2;
 
   @DBRef
   private City city;
 
-  @DBRef
+  @DBRef(lazy = true)
   private State state;
 
-  @DBRef
+  @DBRef(lazy = true)
   private Country country;
 
   @Field
@@ -60,12 +65,25 @@ public class College {
     // TODO Auto-generated constructor stub
   }
 
+
+
   /**
    * @return the id
    */
   public String getId() {
-    return Id;
+    return id;
   }
+
+
+
+  /**
+   * @param id the id to set
+   */
+  public void setId(String id) {
+    this.id = id;
+  }
+
+
 
   /**
    * @return the collegeId
@@ -79,13 +97,6 @@ public class College {
    */
   public void setCollegeId(Long collegeId) {
     this.collegeId = collegeId;
-  }
-
-  /**
-   * @param id the id to set
-   */
-  public void setId(String id) {
-    Id = id;
   }
 
   /**

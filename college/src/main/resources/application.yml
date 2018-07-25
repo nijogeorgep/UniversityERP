@@ -1,6 +1,7 @@
 server:
   port: 9000
-  
+  servlet:
+    path: /collegeservices
 spring:
   application:
     name: college-services
