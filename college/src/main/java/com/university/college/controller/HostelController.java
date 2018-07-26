@@ -51,24 +51,24 @@ public class HostelController {
       return new ResponseEntity<List<Hostel>>(HttpStatus.NO_CONTENT);
     }
 
-    return new ResponseEntity<List<Hostel>>(HttpStatus.OK);
+    return new ResponseEntity<List<Hostel>>(hostels, HttpStatus.OK);
   }
 
   @GetMapping("/hostels/active")
   public ResponseEntity<List<Hostel>> getActiveHostels() {
-    List<Hostel> hostels = hostelRepository.findByActiveStatus(true);
-    if (hostels.isEmpty()) {
+    List<Hostel> activeHostels = hostelRepository.findByActiveStatus(true);
+    if (activeHostels.isEmpty()) {
       return new ResponseEntity<List<Hostel>>(HttpStatus.NO_CONTENT);
     }
 
-    return new ResponseEntity<List<Hostel>>(HttpStatus.OK);
+    return new ResponseEntity<List<Hostel>>(activeHostels, HttpStatus.OK);
   }
 
   @GetMapping("/hostels/inactive")
   public ResponseEntity<List<Hostel>> getInactiveHostels() {
-    List<Hostel> hostels = hostelRepository.findByActiveStatus(false);
-    if (hostels.isEmpty()) {
-      return new ResponseEntity<List<Hostel>>(HttpStatus.NO_CONTENT);
+    List<Hostel> inactiveHostels = hostelRepository.findByActiveStatus(false);
+    if (inactiveHostels.isEmpty()) {
+      return new ResponseEntity<List<Hostel>>(inactiveHostels, HttpStatus.NO_CONTENT);
     }
 
     return new ResponseEntity<List<Hostel>>(HttpStatus.OK);

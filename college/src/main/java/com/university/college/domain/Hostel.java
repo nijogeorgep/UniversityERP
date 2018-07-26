@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class Hostel {
 
   @Id
-  private String Id;
+  private String id;
 
   @Field
   @Indexed
@@ -44,19 +44,22 @@ public class Hostel {
     // TODO Auto-generated constructor stub
   }
 
+
   /**
    * @return the id
    */
   public String getId() {
-    return Id;
+    return id;
   }
+
 
   /**
    * @param id the id to set
    */
   public void setId(String id) {
-    Id = id;
+    this.id = id;
   }
+
 
   /**
    * @return the name

@@ -1,91 +1,35 @@
 /**
  * 
  */
-package com.university.college.domain;
+package com.university.college.dto;
 
 import java.time.LocalDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 /**
  * @author 553243
  *
  */
-@Document(collection = "students")
-public class Student {
+public class StudentDto {
 
-  @Id
-  private String id;
-
-  @Field
-  @Indexed
   private String name;
 
-  @Field
-  @Indexed
   private String rollNo;
 
-  @Field
-  @Indexed
   private LocalDate dob;
 
-  @Field
-  @Indexed
   private String email;
 
-  @Field
-  @Indexed
   private String mobileNumber;
 
-  @Field
-  @Indexed
   private Integer year;
 
-  @Field
-  @Indexed
   private Integer yearOfJoining;
 
-  @DBRef(lazy = true)
-  private College college;
+  private String college;
 
-  @DBRef(lazy = true)
-  private Hostel hostel;
+  private String hostel;
 
-  @Field
-  @Indexed
   private boolean activeStatus;
-
-  @Field
-  private LocalDate createdOn;
-
-  @Field
-  private LocalDate updatedOn;
-
-  /**
-   * 
-   */
-  public Student() {
-    // TODO Auto-generated constructor stub
-  }
-
-  /**
-   * @return the id
-   */
-  public String getId() {
-    return id;
-  }
-
-
-  /**
-   * @param id the id to set
-   */
-  public void setId(String id) {
-    this.id = id;
-  }
-
 
   /**
    * @return the name
@@ -188,28 +132,28 @@ public class Student {
   /**
    * @return the college
    */
-  public College getCollege() {
+  public String getCollege() {
     return college;
   }
 
   /**
    * @param college the college to set
    */
-  public void setCollege(College college) {
+  public void setCollege(String college) {
     this.college = college;
   }
 
   /**
    * @return the hostel
    */
-  public Hostel getHostel() {
+  public String getHostel() {
     return hostel;
   }
 
   /**
    * @param hostel the hostel to set
    */
-  public void setHostel(Hostel hostel) {
+  public void setHostel(String hostel) {
     this.hostel = hostel;
   }
 
@@ -227,32 +171,5 @@ public class Student {
     this.activeStatus = activeStatus;
   }
 
-  /**
-   * @return the createdOn
-   */
-  public LocalDate getCreatedOn() {
-    return createdOn;
-  }
-
-  /**
-   * @param createdOn the createdOn to set
-   */
-  public void setCreatedOn(LocalDate createdOn) {
-    this.createdOn = createdOn;
-  }
-
-  /**
-   * @return the updatedOn
-   */
-  public LocalDate getUpdatedOn() {
-    return updatedOn;
-  }
-
-  /**
-   * @param updatedOn the updatedOn to set
-   */
-  public void setUpdatedOn(LocalDate updatedOn) {
-    this.updatedOn = updatedOn;
-  }
 
 }

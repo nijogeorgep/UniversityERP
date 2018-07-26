@@ -4,6 +4,7 @@
 package com.university.college.controller;
 
 import java.net.URI;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +26,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.university.college.domain.College;
 import com.university.college.domain.Hostel;
 import com.university.college.domain.Student;
+import com.university.college.dto.CollegeDto;
 import com.university.college.exceptions.CollegeNotFoundException;
 import com.university.college.exceptions.HostelNotFoundException;
+import com.university.college.repository.CityRepository;
 import com.university.college.repository.CollegeRepository;
+import com.university.college.repository.CountryRepository;
 import com.university.college.repository.HostelRepository;
+import com.university.college.repository.StateRepository;
 import com.university.college.repository.StudentRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -57,6 +62,15 @@ public class CollegeController {
   private StudentRepository studentRepository;
 
   @Autowired
+  private CountryRepository countryRepository;
+
+  @Autowired
+  private StateRepository stateRepository;
+
+  @Autowired
+  private CityRepository cityRepository;
+
+  @Autowired
   private MongoOperations mongoOperations;
 
   @ApiOperation(value = "View List of all colleges", response = List.class)
@@ -72,21 +86,21 @@ public class CollegeController {
   @ApiOperation(value = "View List of all active colleges", response = List.class)
   @GetMapping("/colleges/active")
   public ResponseEntity<List<College>> getActiveColleges() {
-    List<College> colleges = collegeRepository.findByActiveStatus(true);
-    if (colleges.isEmpty()) {
+    List<College> activeColleges = collegeRepository.findByActiveStatus(true);
+    if (activeColleges.isEmpty()) {
       return new ResponseEntity<List<College>>(HttpStatus.NO_CONTENT);
     }
-    return new ResponseEntity<List<College>>(colleges, HttpStatus.OK);
+    return new ResponseEntity<List<College>>(activeColleges, HttpStatus.OK);
   }
 
   @ApiOperation(value = "View List of all inactive colleges", response = List.class)
   @GetMapping("/colleges/inactive")
   public ResponseEntity<List<College>> getInactiveColleges() {
-    List<College> colleges = collegeRepository.findByActiveStatus(false);
-    if (colleges.isEmpty()) {
+    List<College> inactiveColleges = collegeRepository.findByActiveStatus(false);
+    if (inactiveColleges.isEmpty()) {
       return new ResponseEntity<List<College>>(HttpStatus.NO_CONTENT);
     }
-    return new ResponseEntity<List<College>>(colleges, HttpStatus.OK);
+    return new ResponseEntity<List<College>>(inactiveColleges, HttpStatus.OK);
   }
 
   @ApiOperation(value = "View a college", response = College.class)
@@ -140,19 +154,28 @@ public class CollegeController {
 
   @ApiOperation(value = "Create a college", response = Void.class)
   @PostMapping("/college")
-  public ResponseEntity<Void> saveCollege(@RequestBody College college) {
+  public ResponseEntity<Void> saveCollege(@RequestBody CollegeDto collegeDto) {
     College collegesExists = mongoOperations.findOne(
-        Query.query(Criteria.where("collegeId").is(college.getCollegeId())), College.class);
+        Query.query(Criteria.where("collegeId").is(collegeDto.getCollegeId())), College.class);
 
     if (collegesExists != null) {
       return new ResponseEntity<Void>(HttpStatus.CONFLICT);
     }
-
-    collegeRepository.save(college);
+    collegesExists = new College();
+    collegesExists.setName(collegeDto.getName());
+    collegesExists.setCollegeId(collegeDto.getCollegeId());
+    collegesExists.setAddressLine1(collegeDto.getAddressLine1());
+    collegesExists.setAddressLine2(collegeDto.getAddressLine2());
+    collegesExists.setCity(cityRepository.findById(collegeDto.getCity()).get());
+    collegesExists.setState(stateRepository.findById(collegeDto.getState()).get());
+    collegesExists.setCountry(countryRepository.findById(collegeDto.getCountry()).get());
+    collegesExists.setActiveStatus(collegeDto.isActive());
+    collegesExists.setCreatedOn(LocalDate.now());
+    collegeRepository.save(collegesExists);
 
     HttpHeaders headers = new HttpHeaders();
     URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-        .buildAndExpand(college.getId()).toUri();
+        .buildAndExpand(collegesExists.getId()).toUri();
     headers.setLocation(location);
 
     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
@@ -161,20 +184,26 @@ public class CollegeController {
   @ApiOperation(value = "Update college details by id", response = College.class)
   @PutMapping("/colleges/{id}")
   public ResponseEntity<College> updateCollege(@PathVariable String collegeId,
-      @RequestBody College college) {
-
-    Assert.notNull(collegeId);
-    Assert.notNull(college);
+      @RequestBody CollegeDto collegeDto) {
 
     Optional<College> collegeOptional = collegeRepository.findById(collegeId);
     if (!collegeOptional.isPresent()) {
       return new ResponseEntity<College>(HttpStatus.NOT_FOUND);
     }
+    College college = collegeOptional.get();
     college.setId(collegeId);
-
+    college.setName(collegeDto.getName());
+    college.setCollegeId(collegeDto.getCollegeId());
+    college.setAddressLine1(collegeDto.getAddressLine1());
+    college.setAddressLine2(collegeDto.getAddressLine2());
+    college.setCity(cityRepository.findById(collegeDto.getCity()).get());
+    college.setState(stateRepository.findById(collegeDto.getState()).get());
+    college.setCountry(countryRepository.findById(collegeDto.getCountry()).get());
+    college.setActiveStatus(collegeDto.isActive());
+    college.setUpdatedOn(LocalDate.now());
     collegeRepository.save(college);
 
-    return new ResponseEntity<College>(collegeOptional.get(), HttpStatus.OK);
+    return new ResponseEntity<College>(college, HttpStatus.OK);
   }
 
   @ApiOperation(value = "Delete college details by id", response = College.class)

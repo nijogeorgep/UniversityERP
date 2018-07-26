@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 public class City {
 
   @Id
-  private String Id;
+  private String id;
 
   @Field
   @Indexed
@@ -48,15 +48,19 @@ public class City {
    * @return the id
    */
   public String getId() {
-    return Id;
+    return id;
   }
+
+
 
   /**
    * @param id the id to set
    */
   public void setId(String id) {
-    Id = id;
+    this.id = id;
   }
+
+
 
   /**
    * @return the name
