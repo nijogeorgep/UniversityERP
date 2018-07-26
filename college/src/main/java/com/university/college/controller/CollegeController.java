@@ -104,7 +104,7 @@ public class CollegeController {
   }
 
   @ApiOperation(value = "View a college", response = College.class)
-  @GetMapping("/colleges/{id}")
+  @GetMapping("/colleges/{collegeId}")
   public ResponseEntity<College> getCollege(@PathVariable String collegeId)
       throws CollegeNotFoundException {
     Optional<College> college = collegeRepository.findById(collegeId);
@@ -182,7 +182,7 @@ public class CollegeController {
   }
 
   @ApiOperation(value = "Update college details by id", response = College.class)
-  @PutMapping("/colleges/{id}")
+  @PutMapping("/colleges/{collegeId}")
   public ResponseEntity<College> updateCollege(@PathVariable String collegeId,
       @RequestBody CollegeDto collegeDto) {
 
@@ -207,7 +207,7 @@ public class CollegeController {
   }
 
   @ApiOperation(value = "Delete college details by id", response = College.class)
-  @DeleteMapping("/colleges/{id}")
+  @DeleteMapping("/colleges/{collegeId}")
   public ResponseEntity<College> deleteCollege(@PathVariable String collegeId) {
     Optional<College> collegeOptional = collegeRepository.findById(collegeId);
     if (!collegeOptional.isPresent()) {

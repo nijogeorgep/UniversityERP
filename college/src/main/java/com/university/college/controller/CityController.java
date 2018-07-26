@@ -71,7 +71,7 @@ public class CityController {
     return new ResponseEntity<List<City>>(inactiveCities, HttpStatus.OK);
   }
 
-  @GetMapping("/cities/{id}")
+  @GetMapping("/cities/{cityId}")
   public ResponseEntity<City> getCity(@PathVariable String cityId) throws CityNotFoundException {
     Optional<City> city = cityRepository.findById(cityId);
 
@@ -118,7 +118,7 @@ public class CityController {
     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
   }
 
-  @PutMapping("/cities/{id}")
+  @PutMapping("/cities/{cityId}")
   public ResponseEntity<City> updateCity(@PathVariable String cityId, @RequestBody City city) {
     Optional<City> cityOptional = cityRepository.findById(cityId);
     if (!cityOptional.isPresent()) {
@@ -131,7 +131,7 @@ public class CityController {
     return new ResponseEntity<City>(cityOptional.get(), HttpStatus.OK);
   }
 
-  @DeleteMapping("/cities/{id}")
+  @DeleteMapping("/cities/{cityId}")
   public ResponseEntity<City> deleteCity(@PathVariable String cityId) {
     Optional<City> cityOptional = cityRepository.findById(cityId);
     if (!cityOptional.isPresent()) {

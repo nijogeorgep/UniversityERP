@@ -71,7 +71,7 @@ public class StateController {
     return new ResponseEntity<List<State>>(inactiveStates, HttpStatus.OK);
   }
 
-  @GetMapping("/states/{id}")
+  @GetMapping("/states/{stateId}")
   public ResponseEntity<State> getState(@PathVariable String stateId)
       throws StateNotFoundException {
     Optional<State> state = stateRepository.findById(stateId);
@@ -120,7 +120,7 @@ public class StateController {
     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
   }
 
-  @PutMapping("/states/{id}")
+  @PutMapping("/states/{stateId}")
   public ResponseEntity<State> updateState(@PathVariable String stateId, @RequestBody State state) {
     Optional<State> stateOptional = stateRepository.findById(stateId);
     if (!stateOptional.isPresent()) {
@@ -133,7 +133,7 @@ public class StateController {
     return new ResponseEntity<State>(stateOptional.get(), HttpStatus.OK);
   }
 
-  @DeleteMapping("/states/{id}")
+  @DeleteMapping("/states/{stateId}")
   public ResponseEntity<State> deleteState(@PathVariable String stateId) {
     Optional<State> stateOptional = stateRepository.findById(stateId);
     if (!stateOptional.isPresent()) {

@@ -70,7 +70,7 @@ public class CountryController {
     return new ResponseEntity<List<Country>>(inactiveCountries, HttpStatus.OK);
   }
 
-  @GetMapping("/countries/{id}")
+  @GetMapping("/countries/{countryId}")
   public ResponseEntity<Country> getCountry(@PathVariable String countryId)
       throws CountryNotFoundException {
     Optional<Country> country = countryRepository.findById(countryId);
@@ -119,7 +119,7 @@ public class CountryController {
     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
   }
 
-  @PutMapping("/countries/{id}")
+  @PutMapping("/countries/{countryId}")
   public ResponseEntity<Country> updateCountry(@PathVariable String countryId,
       @RequestBody Country country) {
     Optional<Country> countryOptional = countryRepository.findById(countryId);
@@ -133,7 +133,7 @@ public class CountryController {
     return new ResponseEntity<Country>(countryOptional.get(), HttpStatus.OK);
   }
 
-  @DeleteMapping("/countries/{id}")
+  @DeleteMapping("/countries/{countryId}")
   public ResponseEntity<Country> deleteCountry(@PathVariable String countryId) {
     Optional<Country> countryOptional = countryRepository.findById(countryId);
     if (!countryOptional.isPresent()) {

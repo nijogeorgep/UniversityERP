@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.ContextStartedEvent;
 import org.springframework.stereotype.Component;
 import com.university.college.domain.City;
 import com.university.college.domain.College;
@@ -29,7 +29,7 @@ import com.university.college.repository.StudentRepository;
  *
  */
 @Component
-public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
+public class InitialDataLoader implements ApplicationListener<ContextStartedEvent> {
 
   private static Logger LOGGER = LoggerFactory.getLogger(InitialDataLoader.class);
 
@@ -54,7 +54,7 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
   private CityRepository cityRepository;
 
   @Override
-  public void onApplicationEvent(ContextRefreshedEvent event) {
+  public void onApplicationEvent(ContextStartedEvent event) {
 
     try {
 

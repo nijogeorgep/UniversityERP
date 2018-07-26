@@ -75,7 +75,7 @@ public class StudentController {
     return new ResponseEntity<List<Student>>(inactiveStudents, HttpStatus.OK);
   }
 
-  @GetMapping("/students/{id}")
+  @GetMapping("/students/{studentId}")
   public ResponseEntity<Student> getStudent(@PathVariable String studentId)
       throws StudentNotFoundException {
     Optional<Student> student = studentRepository.findById(studentId);
@@ -117,7 +117,7 @@ public class StudentController {
     return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
   }
 
-  @PutMapping("/students/{id}")
+  @PutMapping("/students/{studentId}")
   public ResponseEntity<Student> updateStudent(@PathVariable String studentId,
       @RequestBody StudentDto studentDto) {
     Optional<Student> studentOptional = studentRepository.findById(studentId);
@@ -142,7 +142,7 @@ public class StudentController {
     return new ResponseEntity<Student>(student, HttpStatus.OK);
   }
 
-  @DeleteMapping("/students/{id}")
+  @DeleteMapping("/students/{studentId}")
   public ResponseEntity<Student> deleteStudent(@PathVariable String studentId) {
     Optional<Student> studentOptional = studentRepository.findById(studentId);
     if (!studentOptional.isPresent()) {

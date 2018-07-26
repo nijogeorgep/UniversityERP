@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("serial")
 public class HostelNotFoundException extends Exception {
   Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-  
+
   public HostelNotFoundException(String string) {
     LOGGER.error(string);
   }

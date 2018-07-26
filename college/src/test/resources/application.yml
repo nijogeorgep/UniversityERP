@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      port: 30000
+      database: mongo-example

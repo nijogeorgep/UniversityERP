@@ -40,6 +40,17 @@ public class Country {
     // TODO Auto-generated constructor stub
   }
 
+  /**
+   * @param name
+   * @param activeStatus
+   */
+  public Country(String name, boolean activeStatus) {
+    super();
+    this.name = name;
+    this.activeStatus = activeStatus;
+  }
+
+
 
   /**
    * @return the id
