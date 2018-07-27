@@ -23,8 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.university.college.domain.Hostel;
 import com.university.college.domain.Student;
-import com.university.college.exceptions.CollegeNotFoundException;
-import com.university.college.exceptions.HostelNotFoundException;
+import com.university.college.exceptions.RecordNotFoundException;
 import com.university.college.repository.HostelRepository;
 import com.university.college.repository.StudentRepository;
 
@@ -76,7 +75,7 @@ public class HostelController {
 
   @GetMapping("/hostels/{hostelId}")
   public ResponseEntity<Hostel> getHostel(@PathVariable String hostelId)
-      throws HostelNotFoundException {
+      throws RecordNotFoundException {
     Optional<Hostel> hostel = hostelRepository.findById(hostelId);
 
     if (!hostel.isPresent()) {
@@ -88,16 +87,16 @@ public class HostelController {
 
   @GetMapping("/hostels/{hostelId}/students")
   public ResponseEntity<List<Student>> getStudentsByHostel(@PathVariable String hostelId)
-      throws CollegeNotFoundException, HostelNotFoundException {
+      throws RecordNotFoundException {
     Optional<Hostel> hostelOptional = hostelRepository.findById(hostelId);
     if (!hostelOptional.isPresent()) {
-      throw new CollegeNotFoundException("College Not Found");
+      throw new RecordNotFoundException("College Not Found");
     }
 
     Optional<List<Student>> studentsOptional =
         studentRepository.findAllByCollege(hostelOptional.get().getId());
     if (!studentsOptional.isPresent()) {
-      throw new HostelNotFoundException("Hostels Not Found");
+      throw new RecordNotFoundException("Hostels Not Found");
     }
 
     return new ResponseEntity<List<Student>>(studentsOptional.get(), HttpStatus.OK);

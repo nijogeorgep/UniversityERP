@@ -4,6 +4,9 @@
 package com.university.college.domain;
 
 import java.time.LocalDate;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -22,22 +25,28 @@ public class Student {
 
   @Field
   @Indexed
+  @NotEmpty(message = "Name can't be empty")
   private String name;
 
   @Field
   @Indexed
+  @NotEmpty(message = "Roll Number can't be empty")
   private String rollNo;
 
   @Field
   @Indexed
+  @NotEmpty(message = "Date of Birth can't be empty")
   private LocalDate dob;
 
   @Field
   @Indexed
+  @NotEmpty(message = "Email can't be empty")
+  @Email(message = "Email should be an valid email")
   private String email;
 
   @Field
   @Indexed
+  @NotEmpty(message = "Mobile number can't be empty")
   private String mobileNumber;
 
   @Field

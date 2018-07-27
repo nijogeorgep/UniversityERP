@@ -14,7 +14,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,8 +26,7 @@ import com.university.college.domain.College;
 import com.university.college.domain.Hostel;
 import com.university.college.domain.Student;
 import com.university.college.dto.CollegeDto;
-import com.university.college.exceptions.CollegeNotFoundException;
-import com.university.college.exceptions.HostelNotFoundException;
+import com.university.college.exceptions.RecordNotFoundException;
 import com.university.college.repository.CityRepository;
 import com.university.college.repository.CollegeRepository;
 import com.university.college.repository.CountryRepository;
@@ -106,7 +104,7 @@ public class CollegeController {
   @ApiOperation(value = "View a college", response = College.class)
   @GetMapping("/colleges/{collegeId}")
   public ResponseEntity<College> getCollege(@PathVariable String collegeId)
-      throws CollegeNotFoundException {
+      throws RecordNotFoundException {
     Optional<College> college = collegeRepository.findById(collegeId);
 
     if (!college.isPresent()) {
@@ -119,16 +117,16 @@ public class CollegeController {
   @ApiOperation(value = "View a list hostels by college", response = List.class)
   @GetMapping("/college/{collegeId}/hostels")
   public ResponseEntity<List<Hostel>> getHostelsByCollege(@PathVariable String collegeId)
-      throws CollegeNotFoundException, HostelNotFoundException {
+      throws RecordNotFoundException {
     Optional<College> college = collegeRepository.findById(collegeId);
     if (!college.isPresent()) {
-      throw new CollegeNotFoundException("College Not Found");
+      throw new RecordNotFoundException("College Not Found");
     }
 
     Optional<List<Hostel>> hostelsOptional =
         hostelRepository.findAllByCollege(college.get().getId());
     if (!hostelsOptional.isPresent()) {
-      throw new HostelNotFoundException("Hostels Not Found");
+      throw new RecordNotFoundException("Hostels Not Found");
     }
 
     return new ResponseEntity<List<Hostel>>(hostelsOptional.get(), HttpStatus.OK);
@@ -137,16 +135,16 @@ public class CollegeController {
   @ApiOperation(value = "View a list students by college", response = List.class)
   @GetMapping("/college/{collegeId}/students")
   public ResponseEntity<List<Student>> getStudentsByCollege(@PathVariable String collegeId)
-      throws CollegeNotFoundException, HostelNotFoundException {
+      throws RecordNotFoundException {
     Optional<College> college = collegeRepository.findById(collegeId);
     if (!college.isPresent()) {
-      throw new CollegeNotFoundException("College Not Found");
+      throw new RecordNotFoundException("College Not Found");
     }
 
     Optional<List<Student>> studentsOptional =
         studentRepository.findAllByCollege(college.get().getId());
     if (!studentsOptional.isPresent()) {
-      throw new HostelNotFoundException("Hostels Not Found");
+      throw new RecordNotFoundException("Hostels Not Found");
     }
 
     return new ResponseEntity<List<Student>>(studentsOptional.get(), HttpStatus.OK);

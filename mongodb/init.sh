@@ -9,7 +9,11 @@ auth="-u user -p $MONGODB_PASSWORD"
 # MONGODB USER CREATION
 (
 echo "setup mongodb auth"
-create_user="if (!db.getUser('user')) { db.createUser({ user: 'user', pwd: '$MONGODB_PASSWORD', roles: [ {role:'readWrite', db:'umanagement'} ]}) }"
+create_user="if (!db.getUser('user')) { 
+	db.createUser({ user: 'user', 
+					pwd: '$MONGODB_PASSWORD', 
+					roles: [ {role:'readWrite', db:'umanagement'} ]})
+}"
 until mongo umanagement --eval "$create_user" || mongo umanagement $auth --eval "$create_user"; do sleep 5; done
 killall mongod
 sleep 1

@@ -7,6 +7,7 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.university.college.domain.Student;
 import com.university.college.dto.StudentDto;
-import com.university.college.exceptions.StudentNotFoundException;
+import com.university.college.exceptions.RecordNotFoundException;
 import com.university.college.repository.CollegeRepository;
 import com.university.college.repository.HostelRepository;
 import com.university.college.repository.StudentRepository;
@@ -77,7 +78,7 @@ public class StudentController {
 
   @GetMapping("/students/{studentId}")
   public ResponseEntity<Student> getStudent(@PathVariable String studentId)
-      throws StudentNotFoundException {
+      throws RecordNotFoundException {
     Optional<Student> student = studentRepository.findById(studentId);
 
     if (!student.isPresent()) {
@@ -88,7 +89,7 @@ public class StudentController {
   }
 
   @PostMapping("/student")
-  public ResponseEntity<Void> saveStudent(@RequestBody StudentDto studentDto) {
+  public ResponseEntity<Void> saveStudent(@Valid @RequestBody StudentDto studentDto) {
     Student studentsExists = mongoOperations
         .findOne(Query.query(Criteria.where("rollNo").is(studentDto.getRollNo())), Student.class);
 

@@ -23,8 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.university.college.domain.College;
 import com.university.college.domain.Country;
-import com.university.college.exceptions.CollegeNotFoundException;
-import com.university.college.exceptions.CountryNotFoundException;
+import com.university.college.exceptions.RecordNotFoundException;
 import com.university.college.repository.CollegeRepository;
 import com.university.college.repository.CountryRepository;
 
@@ -72,7 +71,7 @@ public class CountryController {
 
   @GetMapping("/countries/{countryId}")
   public ResponseEntity<Country> getCountry(@PathVariable String countryId)
-      throws CountryNotFoundException {
+      throws RecordNotFoundException {
     Optional<Country> country = countryRepository.findById(countryId);
 
     if (!country.isPresent()) {
@@ -85,16 +84,16 @@ public class CountryController {
   @GetMapping("/countries/{countryId}/colleges")
   public ResponseEntity<List<College>> getHostelsByCollege(
       @PathVariable(required = true, value = "countryId") String countryId)
-      throws CollegeNotFoundException, CountryNotFoundException {
+      throws RecordNotFoundException {
     Optional<Country> countryOptional = countryRepository.findById(countryId);
     if (!countryOptional.isPresent()) {
-      throw new CountryNotFoundException("Country Not Found");
+      throw new RecordNotFoundException("Country Not Found");
     }
 
     Optional<List<College>> collegeOptional =
         collegeRepository.findAllByCity(countryOptional.get().getId());
     if (!collegeOptional.isPresent()) {
-      throw new CollegeNotFoundException("College Not Found");
+      throw new RecordNotFoundException("College Not Found");
     }
 
     return new ResponseEntity<List<College>>(collegeOptional.get(), HttpStatus.OK);

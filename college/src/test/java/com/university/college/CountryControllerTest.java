@@ -4,6 +4,7 @@
 package com.university.college;
 
 import static org.junit.Assert.assertEquals;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -44,9 +45,9 @@ public class CountryControllerTest {
 
   Optional<Country> mockCountry = Optional.of(new Country("India", true));
 
-  String countryJson = "  {\r\n" + "    \"activeStatus\": true,\r\n"
-      + "    \"createdOn\": \"2018-07-26\",\r\n" + "    \"id\": \"string\",\r\n"
-      + "    \"name\": \"string\",\r\n" + "    \"updatedOn\": \"2018-07-26\"\r\n" + "  }";
+  String countryJson = "  {\r\n" + "    \"activeStatus\": true,\r\n" + "    \"createdOn\": \'"
+      + LocalDateTime.now() + "'\",\r\n" + "    \"name\": \"India\",\r\n" + "    \"updatedOn\": \'"
+      + LocalDateTime.now() + "'\"\r\n" + "  }";
 
   @Test
   public void getCountryDetails() throws Exception {
