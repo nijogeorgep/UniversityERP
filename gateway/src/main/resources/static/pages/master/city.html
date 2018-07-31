@@ -1,0 +1,99 @@
+<div class="col-sm-10 col-md-8">
+    <div class="x_panel">
+        <div class="x_content">
+            <a class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#cityModal"
+               data-backdrop="static" data-keyboard="false"
+               ng-click="resetForm();getCountryList()">
+                <i class="fa fa-plus-square-o"> Add City</i>
+            </a>
+            <br><br>
+            <table object-table
+                   data="cities"
+                   display="10"
+                   headers="Name, state"
+                   fields="name, state"
+                    >
+                <thead>
+                <tr>
+                    <th ng-click="sortBy('name')"
+                        ng-class="headerIsSortedClass('City Name')"
+                        class="sortable">City Name</th>
+                    <th ng-click="sortBy('state.name')"
+                        ng-class="headerIsSortedClass('State')"
+                        class="sortable">State</th>
+                    <th >Option</th>
+                </tr>
+                </thead>
+                <tbody ng-non-bindable>
+                <tr>
+                    <td>{{item.name}}</td>
+                    <td>{{item.state.name}}</td>
+                    <td>
+                        <a class="btn cust-opt-btn btn-info" ng-click="$owner.editCity(item)"  data-toggle="modal" data-target="#cityModal"
+                           data-backdrop="static" data-keyboard="false">
+                            <i class="fa fa-pencil-square-o" ></i>&nbsp;edit
+                        </a>&nbsp;
+                        <a class="btn cust-opt-btn btn-success"  ng-if="!item.activeStatus"  ng-click="$owner.activate(item._id)">
+                            <i class="fa fa-thumbs-o-up"></i>&nbsp;enable
+                        </a>
+                        <a class="btn cust-opt-btn btn-danger" ng-if="item.activeStatus" ng-click="$owner.deactivate(item._id)">
+                            <i class="fa fa-thumbs-o-down"></i>&nbsp;disable
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="cityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" my-modal>
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal" name="cityForm" ng-submit="addCity(city)">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">City</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" ng-class="{'has-error':(cityForm.name.$invalid && !cityForm.name.$pristine) || error.name}">
+                        <label class="">City name <sup class="red">*</sup></label>
+                        <div>
+                            <input class="form-control" type="text" ng-model="city.name" name="name" placeholder="City name" required>
+                            <p ng-show="cityForm.name.$invalid && !cityForm.name.$pristine" class="help-block">Enter valid name</p>
+                            <p ng-show="error.name" class="help-block">{{error.name}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error':(cityForm.country.$invalid && !cityForm.country.$pristine) || error.country}">
+                        <label class="">Country <sup class="red">*</sup></label>
+                        <div>
+                            <select class="form-control"  ng-model="city.country" name="country"  ng-change="getStateList()"
+                                    ng-options="countryObj._id as countryObj.name for countryObj in countries" required>
+                                <option value="">Select</option>
+                            </select>
+                            <p ng-show="cityForm.country.$invalid && !cityForm.country.$pristine" class="help-block">Select valid country</p>
+                            <p ng-show="error.country" class="help-block">{{error.country}}</p>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error':(cityForm.state.$invalid && !cityForm.state.$pristine) || error.state}">
+                        <label class="">State <sup class="red">*</sup></label>
+                        <div>
+                            <select class="form-control"  ng-model="city.state" name="state"
+                                    ng-options="state._id as state.name for state in states" required>
+                                <option value="">Select</option>
+                            </select>
+                            <p ng-show="cityForm.state.$invalid && !cityForm.state.$pristine" class="help-block">Select valid state</p>
+                            <p ng-show="error.state" class="help-block">{{error.state}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" ng-disabled="cityForm.$invalid || cityForm.$pristine" ng-if="!city._id">Save</button>
+                    <button type="submit" class="btn btn-success" ng-disabled="cityForm.$invalid || cityForm.$pristine" ng-if="city._id">Update</button>
+                </div>
+             </form>
+        </div>
+    </div>
+</div>

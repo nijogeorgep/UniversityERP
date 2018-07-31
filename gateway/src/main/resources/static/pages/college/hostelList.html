@@ -1,0 +1,82 @@
+<div class="col-sm-12 col-xs-12">
+    <a class="back-btn pull-left" ui-sref="home.showCollege({id: collegeId})">
+        <i class="fa fa-backward"></i>
+        Back</a>
+    <h2 class="text-center green">{{college.name.toUpperCase()}}</h2>
+</div>
+<div class="col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_content">
+            <div class="col-sm-10 col-md-8 col-xs-12">
+                <a class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#hostelModal"
+                   ng-click="resetForm()"
+                   data-backdrop="static" data-keyboard="false">
+                    <i class="fa fa-plus-square-o"> Add Hostel</i>
+                </a>
+                <br><br>
+            </div>
+            <table class="col-sm-10 col-md-8 col-xs-12" object-table
+                   data="hostels"
+                   display="10"
+                   headers="Name"
+                   fields="name"
+                    >
+                <thead>
+                <tr>
+                    <th ng-click="sortBy('name')"
+                        ng-class="headerIsSortedClass('Hostel Name')"
+                        class="sortable">Hostel Name</th>
+                    <th >Option</th>
+                </tr>
+                </thead>
+                <tbody ng-non-bindable>
+                <tr>
+                    <td>{{item.name}}</td>
+                    <td>
+                        <a  class="btn cust-opt-btn btn-info" ng-click="$owner.resetForm();$owner.editHostel(item)"  data-toggle="modal"
+                            data-target="#hostelModal"
+                            data-backdrop="static" data-keyboard="false">
+                            <span class="fa fa-pencil-square-o" > </span>&nbsp;Edit
+                        </a>&nbsp;
+                        <a  class="btn cust-opt-btn btn-success" ng-if="!item.activeStatus"  ng-click="$owner.activate(item._id)">
+                            <span class="fa fa-thumbs-o-up"> </span>&nbsp;enable
+                        </a>
+                        <a class="btn cust-opt-btn btn-danger" ng-if="item.activeStatus" ng-click="$owner.deactivate(item._id)">
+                            <span class="fa fa-thumbs-o-down"> </span>&nbsp;disable
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="hostelModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" my-modal>
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <form class="form-horizontal" name="hostelForm" ng-submit="addHostel(hostel)">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Hostel</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" ng-class="{'has-error':(hostelForm.name.$invalid && !hostelForm.name.$pristine) || error.name}">
+                        <label class="col-sm-12">Hostel name <sup class="red">*</sup></label>
+                        <div class="col-sm-12">
+                            <input class="form-control" type="text" ng-model="hostel.name" placeholder="Hostel name">
+                            <p ng-show="hostelForm.name.$invalid && !hostelForm.name.$pristine" class="help-block">Select valid name</p>
+                            <p ng-show="error.name" class="help-block">{{error.name}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" ng-disabled="hostelForm.$invalid || hostelForm.$pristine" ng-if="!hostel._id" >Save</button>
+                    <button type="submit" class="btn btn-success" ng-disabled="hostelForm.$invalid || hostelForm.$pristine" ng-if="hostel._id">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

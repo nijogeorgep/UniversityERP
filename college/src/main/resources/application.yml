@@ -1,7 +1,5 @@
 server:
   port: 9000
-  servlet:
-    path: /collegeservices
 spring:
   application:
     name: college-services
@@ -10,9 +8,7 @@ spring:
       host: localhost
       database: universityerp
       port: 27017
-      
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://admin:password@localhost:7000/eureka/
-      
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/

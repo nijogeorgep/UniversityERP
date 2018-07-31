@@ -19,7 +19,7 @@ zuul:
   routes:
   
     college-service:
-        path: /colleges/**
+        path: /**
         serviceId: college-service
         stripPrefix: false
         sensitiveHeaders:

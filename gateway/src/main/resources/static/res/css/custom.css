@@ -1,0 +1,308 @@
+/*
+// Created by Academy on 20/10/16
+*/
+@font-face {
+    font-family: "Roboto";
+    src: url('../fonts/Roboto-Regular.ttf') format("truetype");
+}
+body { font-family: "Roboto" }
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.iod-theme{
+    background-color: #3b69af !important;
+}
+
+.white{
+    color:white;
+}
+
+.help-block{
+    color: #a94442;
+}
+
+.no-left-padding{
+    padding-left: 0px !important;
+}
+
+.no-right-padding{
+    padding-right: 0px !important;
+}
+
+.no-lr-padding{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.green{
+    color: green;
+}
+
+.red{
+    color: red;
+}
+
+.blue{
+    color: blue;
+}
+
+.orange{
+    color: orange;
+}
+
+.cust-opt-btn{
+    font-size: 10px !important;
+    padding: 1px 5px;
+    line-height: 1.5;
+    border-radius: 3px;
+}
+
+
+.nav-tabs > li > div {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+}
+
+.nav-tabs > li > div:hover {
+    border-color: #eee #eee #ddd;
+}
+
+.nav-tabs > li.active > div, .nav-tabs > li.active > div:hover {
+    color: #555;
+    cursor: default;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+
+.nav > li > div {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+}
+
+.nav > li > div:hover {
+    background-color: #eee;
+}
+
+.uib-tab > div {
+    color: #337ab7;
+    cursor: pointer;
+}
+
+.nav-tabs > li.disabled > div {
+    color: #999;
+}
+
+.nav-tabs>li.disabled>div:hover, .nav-tabs>li.disabled>div:focus {
+    color: #999;
+    text-decoration: none;
+    background-color: transparent;
+    cursor: not-allowed;
+}
+
+form.tab-form-demo .tab-pane {
+    margin: 20px 20px;
+}
+
+
+.login-body {
+    color: #032124 !important;
+    background: #D9DEE4 !important;
+}
+
+.dhb-menu{
+    width: 100% !important;
+    height: 85px !important;
+    color: white !important;
+    font-size: 15px !important;
+    white-space: normal !important;
+    text-align: center !important;
+}
+
+.browse-file {
+    background-color: #3c85ac;
+    color: white;
+}
+
+.back-btn{
+    display: inline-block;
+    padding: 18px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    position: absolute;
+    left: 0px;
+}
+
+.btn{
+    margin-bottom: 3px !important;
+}
+
+
+.report_panel {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 15px 0px 25px 0px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #E6E9ED;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+    opacity: 1;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    transition: all .2s ease;
+    border-radius: 5px;
+}
+
+
+.report_content {
+    /*padding: 0 5px 0 6px;*/
+    width: 100%;
+    float: left;
+    clear: both;
+    margin-top: 5px;
+}
+
+.report_content .form-control{
+    padding: 5px 5px !important;
+}
+
+.my-datepicker .form-control {
+    height: 10px;
+    padding: 11px;
+}
+
+.my-datepicker .btn {
+    padding: 1px 2px;
+}
+
+.menu-icon{
+    margin-left: 10px !important;
+}
+
+.outer {
+    width: 100%;
+    text-align: center;
+}
+
+.inner {
+    display: inline-block;
+}
+
+.report-table-scroll{
+    min-height: 300px;
+    padding: 0px
+}
+
+.x_title{
+    background-color: #73879C;
+    color: white;
+    padding-top: 5px;
+    margin: -10px -17px 0px -17px;
+}
+
+.padding-5{
+    padding: 5px;
+}
+
+.cursor{
+    cursor: pointer;
+}
+
+.bg-blue {
+    background: #3498DB !important;
+    border: 1px solid #3498DB !important;
+    color: #fff;
+}
+.bg-purple {
+    background: #9B59B6 !important;
+    border: 1px solid #9B59B6 !important;
+    color: #fff;
+}
+.bg-orange {
+    background: #F39C12 !important;
+    border: 1px solid #F39C12 !important;
+    color: #fff;
+}
+.btn.btn-app {
+    position: relative;
+    padding: 15px 5px;
+    margin: 0 0 10px 10px;
+    min-width: 80px;
+    height: 60px;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    text-align: center;
+    color: #666;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    font-size: 12px;
+}
+.x_content {
+    padding: 0 5px 6px;
+    position: relative;
+    width: 100%;
+    float: left;
+    clear: both;
+    margin-top: 5px;
+}
+.x_panel {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px 17px;
+    display: inline-block;
+    background: #fff;
+    border: 1px solid #E6E9ED;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+    opacity: 1;
+    -moz-transition: all .2s ease;
+    -o-transition: all .2s ease;
+    -webkit-transition: all .2s ease;
+    -ms-transition: all .2s ease;
+    transition: all .2s ease;
+}
+.x_title {
+    background-color: #73879C;
+    color: white;
+    padding: 5px;
+    margin: -10px -17px 0px -17px;
+}
+.x_title h2 {
+    margin: 5px 0 6px;
+    float: left;
+    display: block;
+    text-overflow: ellipsis;
+    /*overflow: hidden;*/
+    white-space: nowrap;
+}
+h2 {
+    font-size: 18px;
+    font-weight: 400;
+}

@@ -1,0 +1,91 @@
+<div class="col-sm-12">
+    <form class="form-horizontal" name="studentForm"  ng-submit="addStudent(item)">
+        <div class="col-sm-6 col-md-5">
+            <div class="form-group" ng-class="{'has-error':(studentForm.name.$invalid && !studentForm.name.$pristine) || error.name}">
+                <label class="">Student name <sup class="red">*</sup></label>
+                <div>
+                    <input class="form-control" type="text" name="name" ng-model="item.name" placeholder="Student name" required>
+                    <p ng-show="studentForm.name.$invalid && !studentForm.name.$pristine" class="help-block">Enter valid name</p>
+                    <p ng-show="error.name && !studentForm.name.$invalid" class="help-block">{{error.name}}</p>
+                </div>
+            </div>
+            <div class="form-group"  ng-class="{'has-error':(studentForm.rollNo.$invalid && !studentForm.rollNo.$pristine) || error.rollNo}">
+                <label class="">Roll no <sup class="red">*</sup></label>
+                <div>
+                    <input class="form-control" type="number" ng-model="item.rollNo" name="rollNo" min="0" placeholder="eg.031190" required>
+                    <p ng-show="studentForm.rollNo.$invalid && !studentForm.rollNo.$pristine" class="help-block">Enter valid roll no</p>
+                    <p ng-show="error.rollNo && !studentForm.rollNo.$invalid" class="help-block">{{error.rollNo}}</p>
+                </div>
+            </div>
+            <div class="form-group"  ng-class="{'has-error':(studentForm.dob.$invalid && !studentForm.dob.$pristine) || error.dob}">
+                <label class="">DOB <sup class="red">*</sup></label>
+                <div>
+                    <input class="form-control" type="text" ng-model="item.dob" name="dob" uib-datepicker-popup="dd-MM-yyyy" is-open="isOpen" max-date="maxDate" ng-click="isOpen = !isOpen" placeholder="date of birth (eg.03-11-90)" >
+                    <p ng-show="studentForm.dob.$invalid && !studentForm.dob.$pristine" class="help-block">Enter valid dob</p>
+                    <p ng-show="error.dob && !studentForm.dob.$invalid" class="help-block">{{error.dob}}</p>
+                </div>
+            </div>
+            <div class="form-group"  ng-class="{'has-error':(studentForm.email.$invalid && !studentForm.email.$pristine) || error.email}">
+                <label class="">E-Mail <sup class="red">*</sup></label>
+                <div>
+                    <input class="form-control" type="email" ng-model="item.email" name="email" placeholder="eg. example@domain.com" required>
+                    <p ng-show="studentForm.email.$invalid && !studentForm.email.$pristine" class="help-block">Enter valid email</p>
+                    <p ng-show="error.email && !studentForm.email.$invalid" class="help-block">{{error.email}}</p>
+                </div>
+            </div>
+            <div class="form-group"  ng-class="{'has-error':(studentForm.mobileNumber.$invalid && !studentForm.mobileNumber.$pristine) || error.mobileNumber}">
+                <label class="">Mobile Number <sup class="red">*</sup></label>
+                <div>
+                    <input class="form-control" type="number" ng-model="item.mobileNumber" name="mobileNumber" min="0" placeholder="eg. 9876543210" required>
+                    <p ng-show="studentForm.mobileNumber.$invalid && !studentForm.mobileNumber.$pristine" class="help-block">Enter valid mobileNumber</p>
+                    <p ng-show="error.mobileNumber && !studentForm.mobileNumber.$invalid" class="help-block">{{error.mobileNumber}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-5 col-md-offset-1">
+            <div class="form-group"  ng-class="{'has-error':(studentForm.year.$invalid && !studentForm.year.$pristine) || error.year}">
+                <label class="">Year of Study <sup class="red">*</sup></label>
+                <div>
+                    <select class="form-control"  ng-model="item.year" name="year" required>
+                        <option value="">Select</option>
+                        <option value="I Year">I Year</option>
+                        <option value="II Year">II Year</option>
+                        <option value="III Year">III Year</option>
+                        <option value="IV Year">IV Year</option>
+                        <option value="V Year">V Year</option>
+                        <option value="VI Year">VI Year</option>
+                    </select>
+                    <p ng-show="studentForm.year.$invalid && !studentForm.year.$pristine" class="help-block">Select the year</p>
+                    <p ng-show="error.year && !studentForm.year.$invalid" class="help-block">{{error.year}}</p>
+                </div>
+            </div>
+            <div class="form-group"  ng-class="{'has-error':(studentForm.hostel.$invalid && !studentForm.hostel.$pristine) || error.hostel}">
+                <label class="">Hostel <sup class="red">*</sup></label>
+                <div>
+                    <select class="form-control"  ng-model="item.hostel" name="hostel"
+                            ng-options="hostel._id as hostel.name for hostel in hostels" required>
+                        <option value="">Select</option>
+                    </select>
+                    <p ng-show="studentForm.hostel.$invalid && !studentForm.hostel.$pristine" class="help-block">Select the hostel</p>
+                    <p ng-show="error.hostel && !studentForm.hostel.$invalid" class="help-block">{{error.hostel}}</p>
+                </div>
+            </div>
+            <div class="form-group"  ng-class="{'has-error':(studentForm.yearOfJoining.$invalid && !studentForm.yearOfJoining.$pristine) || error.yearOfJoining}">
+                <label class="">Year of Joining <sup class="red">*</sup></label>
+                <div>
+                    <input class="form-control" type="number" ng-model="item.yearOfJoining" min="0"  name="yearOfJoining"
+                           required placeholder="eg. 2016 ">
+                    <p ng-show="studentForm.yearOfJoining.$invalid && !studentForm.yearOfJoining.$pristine" class="help-block">Enter valid year of joining</p>
+                    <p ng-show="error.yearOfJoining && !studentForm.yearOfJoining.$invalid" class="help-block">{{error.yearOfJoining}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-11 form-group text-right">
+            <button class="btn btn-sm btn-danger" ui-sref="home.studentList({id: collegeId})">Cancel</button>
+            <button class="btn btn-sm btn-success"  type="submit" ng-if="!item._id"
+                    ng-disabled="studentForm.$invalid || studentForm.$pristine" >Submit</button>
+            <button class="btn btn-sm btn-success" type="submit" ng-if="item._id"
+                    ng-disabled="studentForm.$invalid || studentForm.$pristine" >Update</button>
+        </div>
+    </form>
+</div>

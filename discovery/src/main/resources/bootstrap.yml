@@ -7,17 +7,21 @@ spring:
       fail-fast: false
       password: password
       username: user
-
+  boot:
+    admin:
+      context-path: /admin
 eureka:
   instance:
     prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    health-check-url-path: /actuator/health
   client:
     registerWithEureka: false
     fetchRegistry: false
-#    serviceUrl: 
-#      defaultZone: http://admin:password@localhost:7000/eureka/
+    registry-fetch-interval-seconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
   server:
-      waitTimeInMsWhenSyncEmpty: 0
-  
+    waitTimeInMsWhenSyncEmpty: 0
 server:
   port: 8761
