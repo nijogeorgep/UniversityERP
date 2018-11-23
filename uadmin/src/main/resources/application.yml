@@ -4,6 +4,10 @@ spring:
        url: http://localhost:2000
   application:
     name: bootadmin
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
 server:
   port: 8761
 logging:

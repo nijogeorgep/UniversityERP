@@ -10,5 +10,9 @@ spring:
       fail-fast: false
       password: password
       username: user
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
 logging:
   file: target/${spring.application.name}.log

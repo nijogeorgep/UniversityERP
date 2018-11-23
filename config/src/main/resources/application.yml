@@ -1,7 +1,7 @@
 spring:
   boot:
     admin:
-       url: http://localhost:2000
+      url: http://localhost:2000
   application:
     name: config
   cloud:
@@ -10,12 +10,15 @@ spring:
         native:
           search-locations: classpath:/shared
   profiles:
-     active: native
+    active: native
   security:
     user:
       name: admin
       password: password
-
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
 server:
   port: 8888
 logging:
