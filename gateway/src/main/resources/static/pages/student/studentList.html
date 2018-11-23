@@ -1,64 +1,61 @@
 <div class="col-sm-12 col-xs-12">
-    <a class="back-btn pull-left" ui-sref="home.showCollege({id: collegeId})">
-        <i class="fa fa-backward"></i>
-        Back</a>
-    <h2 class="text-center green">{{college.name.toUpperCase()}}</h2>
+	<a class="back-btn pull-left"
+		ui-sref="home.showCollege({id: collegeId})"> <i
+		class="fa fa-backward"></i> Back
+	</a>
+	<h2 class="text-center green">{{college.name.toUpperCase()}}</h2>
 </div>
 <div class="col-sm-12 col-md-12">
-    <div class="x_panel">
-        <div class="x_title">
-            <h2> <i class="fa fa-list"></i> List</h2>
-            <div class="clearfix"></div>
-        </div>
-        <div class="col-sm-12 x_content">
-            <a class="btn btn-sm btn-primary pull-right" ui-sref="home.student({id: collegeId})">
-                <i class="fa fa-plus-square-o"> Add Student</i>
-            </a>
-            <br><br>
-            <table object-table
-                   data="students"
-                   display="10"
-                   headers="Name, Roll no, DOB, Mobile number"
-                   fields="name,rollNo, dob, mobileNumber"
-                   select="false"
-                    >
-                <thead>
-                <tr>
-                    <th ng-click="sortBy('name')"
-                        ng-class="headerIsSortedClass('Name')"
-                        class="sortable">Name</th>
-                    <th ng-click="sortBy('rollNo')"
-                        ng-class="headerIsSortedClass('Roll No')"
-                        class="sortable">Roll No</th>
-                    <th ng-click="sortBy('dob')"
-                        ng-class="headerIsSortedClass('DOB')"
-                        class="sortable">DOB </th>
-                    <th ng-click="sortBy('mobileNumber')"
-                        ng-class="headerIsSortedClass('Mobile number')"
-                        class="sortable">Mobile number</th>
-                    <th >Option</th>
-                </tr>
-                </thead>
-                <tbody ng-non-bindable>
-                <tr>
-                    <td>{{item.name}}</td>
-                    <td>{{item.rollNo}}</td>
-                    <td>{{item.dob | date:'dd-MMM-yyyy'}}</td>
-                    <td>{{item.mobileNumber}}</td>
-                    <td>
-                        <a class="btn cust-opt-btn btn-info" ng-click="$owner.editStudent(item)">
-                            <i class="glyphicon glyphicon-pencil" ></i>&nbsp;edit
-                        </a>&nbsp;
-                        <a  class="btn cust-opt-btn btn-success" ng-if="!item.activeStatus"  ng-click="$owner.activate(item._id)">
-                            <span class="glyphicon glyphicon-thumbs-up"> </span>&nbsp;enable
-                        </a>
-                        <a class="btn cust-opt-btn btn-danger" ng-if="item.activeStatus" ng-click="$owner.deactivate(item._id)">
-                            <span class="glyphicon glyphicon-thumbs-down"> </span>&nbsp;disable
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+	<div class="x_panel">
+		<div class="x_title">
+			<h2>
+				<i class="fa fa-list"></i> List
+			</h2>
+			<div class="clearfix"></div>
+		</div>
+		<div class="col-sm-12 x_content">
+			<a class="btn btn-sm btn-primary pull-right"
+				ui-sref="home.student({id: collegeId})"> <i
+				class="fa fa-plus-square-o"> Add Student</i>
+			</a> <br>
+			<br>
+			<table object-table data="students" display="10"
+				headers="Name, Roll no, DOB, Mobile number"
+				fields="name,rollNo, dob, mobileNumber" select="false">
+				<thead>
+					<tr>
+						<th ng-click="sortBy('name')"
+							ng-class="headerIsSortedClass('Name')" class="sortable">Name</th>
+						<th ng-click="sortBy('rollNo')"
+							ng-class="headerIsSortedClass('Roll No')" class="sortable">Roll
+							No</th>
+						<th ng-click="sortBy('dob')" ng-class="headerIsSortedClass('DOB')"
+							class="sortable">DOB</th>
+						<th ng-click="sortBy('mobileNumber')"
+							ng-class="headerIsSortedClass('Mobile number')" class="sortable">Mobile
+							number</th>
+						<th>Option</th>
+					</tr>
+				</thead>
+				<tbody ng-non-bindable>
+					<tr>
+						<td>{{item.name}}</td>
+						<td>{{item.rollNo}}</td>
+						<td>{{item.dob | date:'dd-MMM-yyyy'}}</td>
+						<td>{{item.mobileNumber}}</td>
+						<td><a class="btn cust-opt-btn btn-info"
+							ng-click="$owner.editStudent(item)"> <i
+								class="glyphicon glyphicon-pencil"></i>&nbsp;edit
+						</a>&nbsp; <a class="btn cust-opt-btn btn-success"
+							ng-if="!item.activeStatus" ng-click="$owner.activate(item._id)">
+								<span class="glyphicon glyphicon-thumbs-up"> </span>&nbsp;enable
+						</a> <a class="btn cust-opt-btn btn-danger" ng-if="item.activeStatus"
+							ng-click="$owner.deactivate(item._id)"> <span
+								class="glyphicon glyphicon-thumbs-down"> </span>&nbsp;disable
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>

@@ -1,22 +1,22 @@
 {
-  "name": "Washerman",
-  "dependencies": {
-    "angular": "^1.5.8",
-    "angular-ui-router": "~0.2.10",
-    "angular-bootstrap": "1.0.0",
-    "angular-resource": "~1.4.0",
-    "jquery": "^2.2.3",
-    "bootstrap": "^3.3.6",
-    "fastclick": "^1.0.6",
-    "font-awesome": "^4.6.1",
-    "angular-sanitize": "~1.4.0",
-    "angular-animate": "~1.4.0",
-    "angular-object-table": "^0.2.2"
-  },
-  "install": {
-    "path": "libs"
-  },
-  "resolutions": {
-    "angular": "^1.5.8"
-  }
+	"name": "Washerman",
+	"dependencies": {
+		"angular": "^1.5.8",
+		"angular-ui-router": "~0.2.10",
+		"angular-bootstrap": "1.0.0",
+		"angular-resource": "~1.4.0",
+		"jquery": "^2.2.3",
+		"bootstrap": "^3.3.6",
+		"fastclick": "^1.0.6",
+		"font-awesome": "^4.6.1",
+		"angular-sanitize": "~1.4.0",
+		"angular-animate": "~1.4.0",
+		"angular-object-table": "^0.2.2"
+	},
+	"install": {
+		"path": "libs"
+	},
+	"resolutions": {
+		"angular": "^1.5.8"
+	}
 }

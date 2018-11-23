@@ -1,14 +1,25 @@
-server:
-  port: 9000
 spring:
+  boot:
+    admin:
+      url: http://localhost:2000
   application:
     name: college-services
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: false
+      password: password
+      username: user
   data:
     mongodb:
       host: localhost
       database: universityerp
-      port: 27017
+      port: 32768
+server:
+  port: 9000
 eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
+logging:
+  file: target/${spring.application.name}.log

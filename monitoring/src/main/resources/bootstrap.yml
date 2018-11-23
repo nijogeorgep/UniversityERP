@@ -1,4 +1,7 @@
 spring:
+  boot:
+    admin:
+      url: http://localhost:2000
   application:
     name: monitoring
   cloud:
@@ -7,3 +10,5 @@ spring:
       fail-fast: false
       password: password
       username: user
+logging:
+  file: target/${spring.application.name}.log

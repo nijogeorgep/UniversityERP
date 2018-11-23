@@ -1,20 +1,13 @@
 <h2>Separate Search</h2>
 <p>Searching by each column</p>
-	<table object-table 
-	data="data" 
-	headers="Name,Age" 
-	fields="name,age" 
-	search="separate"
-	></table>
+<table object-table data="data" headers="Name,Age" fields="name,age"
+	search="separate"></table>
 <hr>
 
 <!-- CODE -->
 <h3>In template:</h3>
 <textarea ui-codemirror ui-codemirror-opts="editorOptions">
-	<table  object-table 
-			data="data" 
-			headers="Age, full Name" 
-			fields="age,name" 
-			search="separate">
+	<table object-table data="data" headers="Age, full Name"
+		fields="age,name" search="separate">
 	</table>
 </textarea>

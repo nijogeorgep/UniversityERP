@@ -1,4 +1,7 @@
 spring:
+  boot:
+    admin:
+       url: http://localhost:2000
   application:
     name: gateway
   cloud:
@@ -11,3 +14,5 @@ eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
+logging:
+  file: target/${spring.application.name}.log

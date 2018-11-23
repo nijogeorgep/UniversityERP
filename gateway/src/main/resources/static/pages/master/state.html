@@ -1,90 +1,101 @@
 <div class="col-sm-10 col-md-8">
-    <div class="x_panel">
-        <div class="col-sm-12">
-            <a class="btn btn-sm btn-primary pull-right" data-toggle="modal" data-target="#stateModal"
-               data-backdrop="static" data-keyboard="false"
-               ng-click="resetForm();getCountryList()">
-                <i class="fa fa-plus-square-o"> Add State</i>
-            </a>
-            <br><br>
-            <table object-table
-                   data="states"
-                   display="10"
-                   headers="Name, Country"
-                   fields="name, country"
-                    >
-                <thead>
-                <tr>
-                    <th ng-click="sortBy('name')"
-                        ng-class="headerIsSortedClass('State Name')"
-                        class="sortable">State Name</th>
+	<div class="x_panel">
+		<div class="col-sm-12">
+			<a class="btn btn-sm btn-primary pull-right" data-toggle="modal"
+				data-target="#stateModal" data-backdrop="static"
+				data-keyboard="false" ng-click="resetForm();getCountryList()"> <i
+				class="fa fa-plus-square-o"> Add State</i>
+			</a> <br>
+			<br>
+			<table object-table data="states" display="10"
+				headers="Name, Country" fields="name, country">
+				<thead>
+					<tr>
+						<th ng-click="sortBy('name')"
+							ng-class="headerIsSortedClass('State Name')" class="sortable">State
+							Name</th>
 
-                    <th ng-click="sortBy('country.name')"
-                        ng-class="headerIsSortedClass('Country')"
-                        class="sortable">Country</th>
-                    <th >Option</th>
-                </tr>
-                </thead>
-                <tbody ng-non-bindable>
-                <tr>
-                    <td>{{item.name}}</td>
-                    <td>{{item.country.name}}</td>
-                    <td>
-                        <a class="btn cust-opt-btn btn-info" ng-click="$owner.resetForm();$owner.editState(item)"  data-toggle="modal" data-target="#stateModal"
-                           data-backdrop="static" data-keyboard="false">
-                            <i class="fa fa-pencil-square-o" >&nbsp;edit</i>
-                        </a>&nbsp;
-                        <a class="btn cust-opt-btn btn-success"  ng-if="!item.activeStatus"  ng-click="$owner.activate(item._id)">
-                            <i class="fa fa-thumbs-o-up">&nbsp;enable</i>
-                        </a>
-                        <a class="btn cust-opt-btn btn-danger" ng-if="item.activeStatus" ng-click="$owner.deactivate(item._id)">
-                            <i class="fa fa-thumbs-o-down">&nbsp;disable</i>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+						<th ng-click="sortBy('country.name')"
+							ng-class="headerIsSortedClass('Country')" class="sortable">Country</th>
+						<th>Option</th>
+					</tr>
+				</thead>
+				<tbody ng-non-bindable>
+					<tr>
+						<td>{{item.name}}</td>
+						<td>{{item.country.name}}</td>
+						<td><a class="btn cust-opt-btn btn-info"
+							ng-click="$owner.resetForm();$owner.editState(item)"
+							data-toggle="modal" data-target="#stateModal"
+							data-backdrop="static" data-keyboard="false"> <i
+								class="fa fa-pencil-square-o">&nbsp;edit</i>
+						</a>&nbsp; <a class="btn cust-opt-btn btn-success"
+							ng-if="!item.activeStatus" ng-click="$owner.activate(item._id)">
+								<i class="fa fa-thumbs-o-up">&nbsp;enable</i>
+						</a> <a class="btn cust-opt-btn btn-danger" ng-if="item.activeStatus"
+							ng-click="$owner.deactivate(item._id)"> <i
+								class="fa fa-thumbs-o-down">&nbsp;disable</i>
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="stateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" my-modal>
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content">
-            <form class="form-horizontal" name="stateForm" ng-submit="addState(state)">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">State</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group" ng-class="{'has-error':(stateForm.name.$invalid && !stateForm.name.$pristine) || error.name}">
-                        <label class="">Name <sup class="red">*</sup></label>
-                        <div>
-                            <input class="form-control" type="text" ng-model="state.name" placeholder="State name" required>
-                            <p ng-show="stateForm.name.$invalid && !stateForm.name.$pristine" class="help-block">Select valid name</p>
-                            <p ng-show="error.name" class="help-block">{{error.name}}</p>
-                        </div>
-                    </div>
-                    <div class="form-group" ng-class="{'has-error':(stateForm.country.$invalid && !stateForm.country.$pristine) || error.country}">
-                        <label class="">Country <sup class="red">*</sup></label>
-                        <div>
-                            <select class="form-control"  ng-model="state.country"  ng-change="getStateList()"
-                                    ng-options="country._id as country.name for country in countries" placeholder="Select"
-                                    required>
-                                <option value="">Select</option>
-                            </select>
-                            <p ng-show="stateForm.country.$invalid && !stateForm.country.$pristine" class="help-block">Select valid country</p>
-                            <p ng-show="error.country" class="help-block">{{error.country}}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-success" ng-disabled="stateForm.$invalid || stateForm.$pristine" ng-if="!state._id">Save</button>
-                    <button type="submit" class="btn btn-success" ng-disabled="stateForm.$invalid || stateForm.$pristine" ng-if="state._id">Update</button>
-                </div>
-            </form>
-        </div>
-    </div>
+<div class="modal fade" id="stateModal" tabindex="-1" role="dialog"
+	aria-labelledby="myModalLabel" my-modal>
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<form class="form-horizontal" name="stateForm"
+				ng-submit="addState(state)">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">State</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group"
+						ng-class="{'has-error':(stateForm.name.$invalid && !stateForm.name.$pristine) || error.name}">
+						<label class="">Name <sup class="red">*</sup></label>
+						<div>
+							<input class="form-control" type="text" ng-model="state.name"
+								placeholder="State name" required>
+							<p ng-show="stateForm.name.$invalid && !stateForm.name.$pristine"
+								class="help-block">Select valid name</p>
+							<p ng-show="error.name" class="help-block">{{error.name}}</p>
+						</div>
+					</div>
+					<div class="form-group"
+						ng-class="{'has-error':(stateForm.country.$invalid && !stateForm.country.$pristine) || error.country}">
+						<label class="">Country <sup class="red">*</sup></label>
+						<div>
+							<select class="form-control" ng-model="state.country"
+								ng-change="getStateList()"
+								ng-options="country._id as country.name for country in countries"
+								placeholder="Select" required>
+								<option value="">Select</option>
+							</select>
+							<p
+								ng-show="stateForm.country.$invalid && !stateForm.country.$pristine"
+								class="help-block">Select valid country</p>
+							<p ng-show="error.country" class="help-block">{{error.country}}</p>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-success"
+						ng-disabled="stateForm.$invalid || stateForm.$pristine"
+						ng-if="!state._id">Save</button>
+					<button type="submit" class="btn btn-success"
+						ng-disabled="stateForm.$invalid || stateForm.$pristine"
+						ng-if="state._id">Update</button>
+				</div>
+			</form>
+		</div>
+	</div>
 </div>

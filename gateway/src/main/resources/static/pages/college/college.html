@@ -1,70 +1,97 @@
 <div class="col-sm-12">
-    <form class="form-horizontal" name="collegeForm" ng-submit="addCollege(item)">
-        <div class="col-sm-6 col-md-5">
-            <div class="form-group" ng-class="{'has-error':(collegeForm.name.$invalid && !collegeForm.name.$pristine) || error.name}">
-                <label class="">College name <sup class="red">*</sup></label>
-                <div>
-                    <input class="form-control" type="text" name="name" ng-model="item.name" placeholder="College name" required>
-                    <p ng-show="collegeForm.name.$invalid && !collegeForm.name.$pristine" class="help-block">Enter valid name</p>
-                    <p ng-show="error.name " class="help-block">{{error.name}}</p>
-                </div>
-            </div>
-            <div class="form-group" ng-class="{'has-error':(collegeForm.addressLine1.$invalid && !collegeForm.addressLine1.$pristine) || error.addressLine1 }">
-                <label class="">Address line1 <sup class="red">*</sup></label>
-                <div>
-                    <input class="form-control" type="text" name="addressLine1" ng-model="item.addressLine1" placeholder="Address line 1" required>
-                    <p ng-show="collegeForm.addressLine1.$invalid && !collegeForm.addressLine1.$pristine" class="help-block">Enter valid address line 1</p>
-                    <p ng-show="error.addressLine1 " class="help-block">{{error.addressLine1}}</p>
-                </div>
-            </div>
-            <div class="form-group" ng-class="{'has-error':(collegeForm.addressLine2.$invalid && !collegeForm.addressLine2.$pristine) || error.addressLine2 }">
-                <label class="">Address line2</label>
-                <div>
-                    <input class="form-control" type="text" name="addressLine2" ng-model="item.addressLine2" placeholder="Address line 2">
-                    <p ng-show="collegeForm.addressLine2.$invalid && !collegeForm.addressLine2.$pristine" class="help-block">Enter valid address line 2</p>
-                    <p ng-show="error.addressLine2 " class="help-block">{{error.addressLine2}}</p>
-                </div>
-            </div>
-            <div class="form-group" ng-class="{'has-error':(collegeForm.country.$invalid && !collegeForm.country.$pristine) || error.country}">
-                <label class="">Country <sup class="red">*</sup></label>
-                <div>
-                    <select class="form-control"  ng-model="item.country" ng-change="getStateList()" name="country"
-                            ng-options="country._id as country.name for country in countries" required >
-                        <option value="">Select</option>
-                    </select>
-                    <p ng-show="collegeForm.country.$invalid && !collegeForm.country.$pristine" class="help-block">Select the country</p>
-                    <p ng-show="error.country " class="help-block">{{error.country}}</p>
-                </div>
-            </div>
-            <div class="form-group"  ng-class="{'has-error':(collegeForm.state.$invalid && !collegeForm.state.$pristine) || error.state }">
-                <label class="">State <sup class="red">*</sup></label>
-                <div>
-                    <select class="form-control"  ng-model="item.state" name="state"
-                            ng-options="state._id as state.name for state in states" required ng-change="getCityList()">
-                        <option value="">Select</option>
-                    </select>
-                    <p ng-show="collegeForm.state.$invalid && !collegeForm.state.$pristine" class="help-block">Select the state</p>
-                    <p ng-show="error.state " class="help-block">{{error.state}}</p>
-                </div>
-            </div>
-            <div class="form-group"  ng-class="{'has-error':(collegeForm.city.$invalid && !collegeForm.city.$pristine) || error.city}">
-                <label class="">City <sup class="red">*</sup></label>
-                <div>
-                    <select class="form-control"  ng-model="item.city" name="city"
-                            ng-options="city._id as city.name for city in cities" required>
-                        <option value="">Select</option>
-                    </select>
-                    <p ng-show="collegeForm.city.$invalid && !collegeForm.city.$pristine" class="help-block">Select the city</p>
-                    <p ng-show="error.city " class="help-block">{{error.city}}</p>
-                </div>
-            </div>
-            <div class="form-group text-right">
-                <button class="btn btn-sm btn-danger" ui-sref="home.college">Cancel</button>
-                <button class="btn btn-sm btn-success"  type="submit" ng-if="!item._id"
-                        ng-disabled="collegeForm.$invalid || collegeForm.$pristine"  >Submit</button>
-                <button class="btn btn-sm btn-success" type="submit" ng-if="item._id"
-                        ng-disabled="collegeForm.$invalid || collegeForm.$pristine"  >Update</button>
-            </div>
-        </div>
-    </form>
+	<form class="form-horizontal" name="collegeForm"
+		ng-submit="addCollege(item)">
+		<div class="col-sm-6 col-md-5">
+			<div class="form-group"
+				ng-class="{'has-error':(collegeForm.name.$invalid && !collegeForm.name.$pristine) || error.name}">
+				<label class="">College name <sup class="red">*</sup></label>
+				<div>
+					<input class="form-control" type="text" name="name"
+						ng-model="item.name" placeholder="College name" required>
+					<p
+						ng-show="collegeForm.name.$invalid && !collegeForm.name.$pristine"
+						class="help-block">Enter valid name</p>
+					<p ng-show="error.name " class="help-block">{{error.name}}</p>
+				</div>
+			</div>
+			<div class="form-group"
+				ng-class="{'has-error':(collegeForm.addressLine1.$invalid && !collegeForm.addressLine1.$pristine) || error.addressLine1 }">
+				<label class="">Address line1 <sup class="red">*</sup></label>
+				<div>
+					<input class="form-control" type="text" name="addressLine1"
+						ng-model="item.addressLine1" placeholder="Address line 1" required>
+					<p
+						ng-show="collegeForm.addressLine1.$invalid && !collegeForm.addressLine1.$pristine"
+						class="help-block">Enter valid address line 1</p>
+					<p ng-show="error.addressLine1 " class="help-block">{{error.addressLine1}}</p>
+				</div>
+			</div>
+			<div class="form-group"
+				ng-class="{'has-error':(collegeForm.addressLine2.$invalid && !collegeForm.addressLine2.$pristine) || error.addressLine2 }">
+				<label class="">Address line2</label>
+				<div>
+					<input class="form-control" type="text" name="addressLine2"
+						ng-model="item.addressLine2" placeholder="Address line 2">
+					<p
+						ng-show="collegeForm.addressLine2.$invalid && !collegeForm.addressLine2.$pristine"
+						class="help-block">Enter valid address line 2</p>
+					<p ng-show="error.addressLine2 " class="help-block">{{error.addressLine2}}</p>
+				</div>
+			</div>
+			<div class="form-group"
+				ng-class="{'has-error':(collegeForm.country.$invalid && !collegeForm.country.$pristine) || error.country}">
+				<label class="">Country <sup class="red">*</sup></label>
+				<div>
+					<select class="form-control" ng-model="item.country"
+						ng-change="getStateList()" name="country"
+						ng-options="country._id as country.name for country in countries"
+						required>
+						<option value="">Select</option>
+					</select>
+					<p
+						ng-show="collegeForm.country.$invalid && !collegeForm.country.$pristine"
+						class="help-block">Select the country</p>
+					<p ng-show="error.country " class="help-block">{{error.country}}</p>
+				</div>
+			</div>
+			<div class="form-group"
+				ng-class="{'has-error':(collegeForm.state.$invalid && !collegeForm.state.$pristine) || error.state }">
+				<label class="">State <sup class="red">*</sup></label>
+				<div>
+					<select class="form-control" ng-model="item.state" name="state"
+						ng-options="state._id as state.name for state in states" required
+						ng-change="getCityList()">
+						<option value="">Select</option>
+					</select>
+					<p
+						ng-show="collegeForm.state.$invalid && !collegeForm.state.$pristine"
+						class="help-block">Select the state</p>
+					<p ng-show="error.state " class="help-block">{{error.state}}</p>
+				</div>
+			</div>
+			<div class="form-group"
+				ng-class="{'has-error':(collegeForm.city.$invalid && !collegeForm.city.$pristine) || error.city}">
+				<label class="">City <sup class="red">*</sup></label>
+				<div>
+					<select class="form-control" ng-model="item.city" name="city"
+						ng-options="city._id as city.name for city in cities" required>
+						<option value="">Select</option>
+					</select>
+					<p
+						ng-show="collegeForm.city.$invalid && !collegeForm.city.$pristine"
+						class="help-block">Select the city</p>
+					<p ng-show="error.city " class="help-block">{{error.city}}</p>
+				</div>
+			</div>
+			<div class="form-group text-right">
+				<button class="btn btn-sm btn-danger" ui-sref="home.college">Cancel</button>
+				<button class="btn btn-sm btn-success" type="submit"
+					ng-if="!item._id"
+					ng-disabled="collegeForm.$invalid || collegeForm.$pristine">Submit</button>
+				<button class="btn btn-sm btn-success" type="submit"
+					ng-if="item._id"
+					ng-disabled="collegeForm.$invalid || collegeForm.$pristine">Update</button>
+			</div>
+		</div>
+	</form>
 </div>

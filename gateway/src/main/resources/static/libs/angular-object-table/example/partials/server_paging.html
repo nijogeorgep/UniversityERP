@@ -3,12 +3,18 @@
 
 <div class="bs-callout bs-callout-primary">
 	Just imagine, server returns JSON, that contains such information: <br>
-	<code>data</code>: array of objects <br>
-<code>page</code>: current number page<br>
-<code>limit</code>: the amount of items on the page <br>
-<code>total</code>: the total amount of objects (to calculate the number of pages). <br>
-<br>	<h4>Example</h4> <br>
-<textarea ui-codemirror ui-codemirror-opts="editorOptionsJS">
+	<code>data</code>
+	: array of objects <br>
+	<code>page</code>
+	: current number page<br>
+	<code>limit</code>
+	: the amount of items on the page <br>
+	<code>total</code>
+	: the total amount of objects (to calculate the number of pages). <br>
+	<br>
+	<h4>Example</h4>
+	<br>
+	<textarea ui-codemirror ui-codemirror-opts="editorOptionsJS">
 	{
 	    "data":[
 	    {"name": "Moroni", "age": 50, "money": -10},
@@ -29,20 +35,19 @@
 </textarea>
 </div>
 
-<table  object-table 
-data="simplePaging.data" 
-display="simplePaging.display" 
-headers="Age, full Name" 
-fields="age,name">
+<table object-table data="simplePaging.data"
+	display="simplePaging.display" headers="Age, full Name"
+	fields="age,name">
 </table>
 <!-- navigation -->
 <nav>
 	<ul class="pagination">
-		<li ng-class="{disabled : simplePaging.currentPage == 1}">
-			<a href ng-click="loadSimpleData(simplePaging.currentPage-1)">« Prev</a>
-		</li>
-		<li ng-class="{disabled : simplePaging.currentPage == simplePaging.pages}">
-			<a href ng-click="loadSimpleData(simplePaging.currentPage+1)">Next »</a>
+		<li ng-class="{disabled : simplePaging.currentPage == 1}"><a href
+			ng-click="loadSimpleData(simplePaging.currentPage-1)">« Prev</a></li>
+		<li
+			ng-class="{disabled : simplePaging.currentPage == simplePaging.pages}">
+			<a href ng-click="loadSimpleData(simplePaging.currentPage+1)">Next
+				»</a>
 		</li>
 	</ul>
 </nav>
@@ -50,11 +55,9 @@ fields="age,name">
 <!-- CODE -->
 <h3>In template:</h3>
 <textarea ui-codemirror ui-codemirror-opts="editorOptions">
-	<table  object-table 
-			data="simplePaging.data" 
-			display="simplePaging.display" 
-			headers="Age, full Name" 
-			fields="age,name">
+	<table object-table data="simplePaging.data"
+		display="simplePaging.display" headers="Age, full Name"
+		fields="age,name">
 	</table>
 	<!-- navigation -->
 	<nav>
@@ -62,7 +65,8 @@ fields="age,name">
 			<li ng-class="{disabled : simplePaging.currentPage == 1}">
 				<a href ng-click="loadSimpleData(simplePaging.currentPage-1)">« Prev</a>
 			</li>
-			<li ng-class="{disabled : simplePaging.currentPage == simplePaging.pages}">
+			<li
+				ng-class="{disabled : simplePaging.currentPage == simplePaging.pages}">
 				<a href ng-click="loadSimpleData(simplePaging.currentPage+1)">Next »</a>
 			</li>
 		</ul>
@@ -105,50 +109,43 @@ fields="age,name">
 
 	// load first page
 	$scope.loadSimpleData(1);
-</textarea>	
+</textarea>
 <hr>
 
 <h2>Server Paging (Advanced)</h2>
 
-<table  object-table 
-data="advPaging.data" 
-display="advPaging.display" 
-headers="Age, full Name" 
-fields="age,name">
+<table object-table data="advPaging.data" display="advPaging.display"
+	headers="Age, full Name" fields="age,name">
 </table>
 
 <!---loading -->
 <div class="loading" ng-show="!advPaging.data.length">
-	<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading Data...
+	<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>
+	Loading Data...
 </div>
 
 <!-- navigation -->
 <nav>
 	<ul class="pagination">
-		<li ng-class="{disabled : advPaging.currentPage==1}">
-			<a href ng-click="loadData(advPaging.currentPage-1)">« Prev</a>
+		<li ng-class="{disabled : advPaging.currentPage==1}"><a href
+			ng-click="loadData(advPaging.currentPage-1)">« Prev</a></li>
+
+		<li ng-repeat="n in advPaging.pages" ng-click="loadData(n+1)"
+			ng-class="{active: n == advPaging.currentPage-1}"><a
+			href="javascript:void(0)">{{n+1}}</a></li>
+
+		<li
+			ng-class="{disabled : advPaging.currentPage == advPaging.pages.length}">
+			<a href ng-click="loadData(advPaging.currentPage+1)">Next »</a>
 		</li>
-
-		<li ng-repeat="n in advPaging.pages"
-		ng-click="loadData(n+1)"
-		ng-class="{active: n == advPaging.currentPage-1}">
-		<a href="javascript:void(0)">{{n+1}}</a>
-	</li>
-
-	<li ng-class="{disabled : advPaging.currentPage == advPaging.pages.length}">
-		<a href ng-click="loadData(advPaging.currentPage+1)">Next »</a>
-	</li>
-</ul>
+	</ul>
 </nav>
 
 <!-- CODE -->
 <h3>In template:</h3>
 <textarea ui-codemirror ui-codemirror-opts="editorOptions">
-	<table  object-table 
-			data="advPaging.data" 
-			display="advPaging.display" 
-			headers="Age, full Name" 
-			fields="age,name">
+	<table object-table data="advPaging.data" display="advPaging.display"
+		headers="Age, full Name" fields="age,name">
 	</table>
 
 	<!---loading -->
@@ -163,13 +160,13 @@ fields="age,name">
 				<a href ng-click="loadData(advPaging.currentPage-1)">« Prev</a>
 			</li>
 
-			<li ng-repeat="n in advPaging.pages"
-			ng-click="loadData(n+1)"
-			ng-class="{active: n == advPaging.currentPage-1}">
+			<li ng-repeat="n in advPaging.pages" ng-click="loadData(n+1)"
+				ng-class="{active: n == advPaging.currentPage-1}">
 			<a href="javascript:void(0)">{{n+1}}</a>
 		</li>
 
-		<li ng-class="{disabled : advPaging.currentPage == advPaging.pages.length}">
+		<li
+				ng-class="{disabled : advPaging.currentPage == advPaging.pages.length}">
 			<a href ng-click="loadData(advPaging.currentPage+1)">Next »</a>
 		</li>
 	</ul>

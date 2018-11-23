@@ -1,0 +1,10 @@
+spring: 
+  boot:
+    admin:
+       url: http://localhost:2000
+  application:
+    name: bootadmin
+server:
+  port: 8761
+logging:
+  file: target/${spring.application.name}.log

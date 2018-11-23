@@ -1,4 +1,7 @@
 spring:
+  boot:
+    admin:
+       url: http://localhost:2000
   application:
     name: config
   cloud:
@@ -15,3 +18,5 @@ spring:
 
 server:
   port: 8888
+logging:
+  file: target/${spring.application.name}.log

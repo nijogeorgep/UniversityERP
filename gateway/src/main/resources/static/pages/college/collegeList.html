@@ -1,56 +1,45 @@
 <div class="col-sm-12 col-md-10">
-    <div class="x_panel">
-        <div class="x_content ">
-            <a class="btn btn-sm btn-primary pull-right" ui-sref="home.createCollege">
-                <i class="fa fa-plus-square-o"> Add College</i>
-            </a>
-            <br><br>
-            <table object-table
-                   data="colleges"
-                   display="10"
-                   headers="Name, City,State"
-                   fields="name,city.name,state.name"
-                    >
-                <thead>
-                <tr>
-                    <th ng-click="sortBy('name')"
-                        ng-class="headerIsSortedClass('College Name')"
-                        class="sortable">College Name</th>
-                    <th ng-click="sortBy('city.name')"
-                        ng-class="headerIsSortedClass('City')"
-                        class="sortable">City</th>
-                    <th ng-click="sortBy('state.name')"
-                        ng-class="headerIsSortedClass('State')"
-                        class="sortable">State</th>
-                    <th >Option</th>
-                </tr>
-                </thead>
-                <tbody ng-non-bindable>
-                <tr>
-                    <td>
-                        <a  ng-if="item.activeStatus" ui-sref="home.showCollege({id: item._id})">{{item.name}} </a>
-                        <span ng-if="!item.activeStatus">{{item.name}} </span>
-                    </td>
-                    <td>
-                        {{item.city.name}}
-                    </td>
-                    <td>
-                        {{item.state.name}}
-                    </td>
-                    <td>
-                        <a class="btn cust-opt-btn btn-info"  ui-sref="home.editCollege({id: item._id})">
-                            <i class="fa fa-pencil-square-o"></i>&nbsp;edit
-                        </a> &nbsp;
-                        <a class="btn cust-opt-btn btn-success" ng-if="!item.activeStatus"  ng-click="$owner.activate(item._id)">
-                            <i class="fa fa-thumbs-o-up"></i>&nbsp;enable
-                        </a>
-                        <a class="btn cust-opt-btn btn-danger" ng-if="item.activeStatus" ng-click="$owner.deactivate(item._id)">
-                            <i class="fa fa-thumbs-o-down"></i>&nbsp;disable
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+	<div class="x_panel">
+		<div class="x_content ">
+			<a class="btn btn-sm btn-primary pull-right"
+				ui-sref="home.createCollege"> <i class="fa fa-plus-square-o">
+					Add College</i>
+			</a> <br>
+			<br>
+			<table object-table data="colleges" display="10"
+				headers="Name, City,State" fields="name,city.name,state.name">
+				<thead>
+					<tr>
+						<th ng-click="sortBy('name')"
+							ng-class="headerIsSortedClass('College Name')" class="sortable">College
+							Name</th>
+						<th ng-click="sortBy('city.name')"
+							ng-class="headerIsSortedClass('City')" class="sortable">City</th>
+						<th ng-click="sortBy('state.name')"
+							ng-class="headerIsSortedClass('State')" class="sortable">State</th>
+						<th>Option</th>
+					</tr>
+				</thead>
+				<tbody ng-non-bindable>
+					<tr>
+						<td><a ng-if="item.activeStatus"
+							ui-sref="home.showCollege({id: item._id})">{{item.name}} </a> <span
+							ng-if="!item.activeStatus">{{item.name}} </span></td>
+						<td>{{item.city.name}}</td>
+						<td>{{item.state.name}}</td>
+						<td><a class="btn cust-opt-btn btn-info"
+							ui-sref="home.editCollege({id: item._id})"> <i
+								class="fa fa-pencil-square-o"></i>&nbsp;edit
+						</a> &nbsp; <a class="btn cust-opt-btn btn-success"
+							ng-if="!item.activeStatus" ng-click="$owner.activate(item._id)">
+								<i class="fa fa-thumbs-o-up"></i>&nbsp;enable
+						</a> <a class="btn cust-opt-btn btn-danger" ng-if="item.activeStatus"
+							ng-click="$owner.deactivate(item._id)"> <i
+								class="fa fa-thumbs-o-down"></i>&nbsp;disable
+						</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
