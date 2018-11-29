@@ -1,7 +1,7 @@
 spring:
   boot:
     admin:
-       url: http://localhost:2000
+      url: http://localhost:2000
   application:
     name: discovery
   cloud:
@@ -10,9 +10,6 @@ spring:
       fail-fast: false
       password: password
       username: user
-  boot:
-    admin:
-      context-path: /admin
 eureka:
   instance:
     prefer-ip-address: true
@@ -30,3 +27,15 @@ server:
   port: 8761
 logging:
   file: target/${spring.application.name}.log
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  endpoint:
+#    health:
+#      show-details: ALWAYS
+security:
+  user:
+    name: admin
+    password: admin123

@@ -13,7 +13,6 @@ spring:
     active: native
   security:
     user:
-      name: admin
       password: password
 eureka:
   client:
@@ -23,3 +22,15 @@ server:
   port: 8888
 logging:
   file: target/${spring.application.name}.log
+security:
+  user:
+    name: admin
+    password: admin123
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: '*'
+#  endpoint:
+#    health:
+#      show-details: ALWAYS

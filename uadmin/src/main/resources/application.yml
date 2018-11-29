@@ -1,21 +1,38 @@
-spring: 
+spring:
+  security:
+    user:
+      name: user
+      password: password
   boot:
     admin:
-       url: http://localhost:2000
+      client:
+        username: user
+        password: password
+        instance:
+          metadata:
+            user.name: user
+            user.password: password
+      url: http://localhost:2000
   application:
-    name: bootadmin
+    name: boot-admin-server
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: false
+      password: password
+      username: user
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    health:
+      show-details: ALWAYS
 eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
-management:
-  security:
-    enabled: false
-security:
-  user: 
-    name: admin
-    password: admin123
 server:
-  port: 8761
+  port: 2000
 logging:
   file: target/${spring.application.name}.log
