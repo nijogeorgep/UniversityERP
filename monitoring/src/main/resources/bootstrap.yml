@@ -1,7 +1,22 @@
 spring:
+  security:
+    user:
+      name: user
+      password: password
   boot:
     admin:
-      url: http://localhost:2000
+      client:
+        username: user
+        password: password
+        enabled: true
+        url: http://localhost:2000
+        period: 10000
+        auto-registration: true
+        instance:
+          name: ${spring.application.name}
+          metadata:
+            user.name: user
+            user.password: password
   application:
     name: monitoring
   cloud:
@@ -24,7 +39,3 @@ management:
   endpoint:
     health:
       show-details: ALWAYS
-security:
-  user:
-    name: admin
-    password: admin123

@@ -5,6 +5,8 @@ spring:
       password: password
   boot:
     admin:
+      ui:
+        title: University ERP Administration
       client:
         username: user
         password: password
@@ -25,9 +27,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
-    health:
-      show-details: ALWAYS
+        include: "*"
 eureka:
   client:
     service-url:

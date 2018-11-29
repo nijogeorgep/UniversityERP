@@ -2,6 +2,9 @@ spring:
   boot:
     admin:
       url: http://localhost:2000
+      client:
+        username: user
+        password: password
   application:
     name: discovery
   cloud:
@@ -27,14 +30,6 @@ server:
   port: 8761
 logging:
   file: target/${spring.application.name}.log
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: '*'
-#  endpoint:
-#    health:
-#      show-details: ALWAYS
 security:
   user:
     name: admin

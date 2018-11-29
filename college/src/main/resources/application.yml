@@ -1,10 +1,22 @@
 spring:
-  boot.admin.client:
-    url: http://localhost:2000
-    instance:
-      metadata:
-        user.name: user
-        user.password: password
+  security:
+    user:
+      name: user
+      password: password
+  boot:
+    admin:
+      client:
+        username: user
+        password: password
+        enabled: true
+        url: http://localhost:2000
+        period: 10000
+        auto-registration: true
+        instance:
+          name: ${spring.application.name}
+          metadata:
+            user.name: user
+            user.password: password
   application:
     name: college-services
   cloud:
@@ -26,7 +38,10 @@ eureka:
       defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
 logging:
   file: target/${spring.application.name}.log
-#security:
-#  user:
-#    name: user
-#    password: password
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
