@@ -17,7 +17,7 @@ spring:
       url: http://localhost:2000
   application:
     name: boot-admin-server
-  cloud:
+  cloud: 
     config:
       uri: http://localhost:8888
       fail-fast: false
